@@ -1,0 +1,34 @@
+D:\Software Developments\Balancika\BalancikaSolutions-master\Balancika.DAL\bin\Debug\Balancika.DAL.dll
+D:\Software Developments\Balancika\BalancikaSolutions-master\Balancika.DAL\bin\Debug\Balancika.DAL.pdb
+D:\Software Developments\Balancika\BalancikaSolutions-master\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Software Developments\Balancika\BalancikaSolutions-master\Balancika.DAL\obj\Debug\Balancika.DAL.dll
+D:\Software Developments\Balancika\BalancikaSolutions-master\Balancika.DAL\obj\Debug\Balancika.DAL.pdb
+C:\Users\omi\Downloads\Compressed\BalancikaSolutions-master_With menu\BalancikaSolutions-master\Balancika.DAL\bin\Debug\Balancika.DAL.dll
+C:\Users\omi\Downloads\Compressed\BalancikaSolutions-master_With menu\BalancikaSolutions-master\Balancika.DAL\bin\Debug\Balancika.DAL.pdb
+C:\Users\omi\Downloads\Compressed\BalancikaSolutions-master_With menu\BalancikaSolutions-master\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\omi\Downloads\Compressed\BalancikaSolutions-master_With menu\BalancikaSolutions-master\Balancika.DAL\obj\Debug\Balancika.DAL.csprojResolveAssemblyReference.cache
+C:\Users\omi\Downloads\Compressed\BalancikaSolutions-master_With menu\BalancikaSolutions-master\Balancika.DAL\obj\Debug\Balancika.DAL.dll
+C:\Users\omi\Downloads\Compressed\BalancikaSolutions-master_With menu\BalancikaSolutions-master\Balancika.DAL\obj\Debug\Balancika.DAL.pdb
+E:\OfficeWork Final\final-indent-master\Balancika.DAL\bin\Debug\Balancika.DAL.dll
+E:\OfficeWork Final\final-indent-master\Balancika.DAL\bin\Debug\Balancika.DAL.pdb
+E:\OfficeWork Final\final-indent-master\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\OfficeWork Final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.csprojResolveAssemblyReference.cache
+E:\OfficeWork Final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.dll
+E:\OfficeWork Final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.pdb
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\bin\Debug\Balancika.DAL.dll
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\bin\Debug\Balancika.DAL.pdb
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.csprojResolveAssemblyReference.cache
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.dll
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.pdb
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\bin\Debug\Balancika.DAL.dll
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\bin\Debug\Balancika.DAL.pdb
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.csprojResolveAssemblyReference.cache
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.dll
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.pdb
+D:\Software Developments\Balancika\project final\final-indent-master\Balancika.DAL\bin\Debug\Balancika.DAL.dll
+D:\Software Developments\Balancika\project final\final-indent-master\Balancika.DAL\bin\Debug\Balancika.DAL.pdb
+D:\Software Developments\Balancika\project final\final-indent-master\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Software Developments\Balancika\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.dll
+D:\Software Developments\Balancika\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.pdb

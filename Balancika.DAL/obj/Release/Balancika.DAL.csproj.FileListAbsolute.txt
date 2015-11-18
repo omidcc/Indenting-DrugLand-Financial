@@ -1,0 +1,10 @@
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\bin\Release\Balancika.DAL.dll
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\bin\Release\Balancika.DAL.pdb
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\bin\Release\Microsoft.Web.Infrastructure.dll
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\obj\Release\Balancika.DAL.dll
+C:\Users\omi\Desktop\project final\final-indent-master\Balancika.DAL\obj\Release\Balancika.DAL.pdb
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\bin\Release\Balancika.DAL.dll
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\bin\Release\Balancika.DAL.pdb
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\bin\Release\Microsoft.Web.Infrastructure.dll
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\obj\Release\Balancika.DAL.dll
+H:\DrugLand\project final\final-indent-master\Balancika.DAL\obj\Release\Balancika.DAL.pdb

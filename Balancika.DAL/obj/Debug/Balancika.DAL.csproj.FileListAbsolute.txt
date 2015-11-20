@@ -32,3 +32,8 @@ D:\Software Developments\Balancika\project final\final-indent-master\Balancika.D
 D:\Software Developments\Balancika\project final\final-indent-master\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
 D:\Software Developments\Balancika\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.dll
 D:\Software Developments\Balancika\project final\final-indent-master\Balancika.DAL\obj\Debug\Balancika.DAL.pdb
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.DAL\bin\Debug\Balancika.DAL.dll
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.DAL\bin\Debug\Balancika.DAL.pdb
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.dll
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.pdb

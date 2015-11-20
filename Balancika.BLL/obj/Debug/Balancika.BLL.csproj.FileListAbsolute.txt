@@ -96,3 +96,10 @@ D:\Software Developments\Balancika\project final\final-indent-master\Balancika.B
 D:\Software Developments\Balancika\project final\final-indent-master\Balancika.BLL\obj\Debug\Balancika.BLL.csprojResolveAssemblyReference.cache
 D:\Software Developments\Balancika\project final\final-indent-master\Balancika.BLL\obj\Debug\Balancika.BLL.dll
 D:\Software Developments\Balancika\project final\final-indent-master\Balancika.BLL\obj\Debug\Balancika.BLL.pdb
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.BLL\bin\Debug\Balancika.BLL.dll
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.BLL\bin\Debug\Balancika.BLL.pdb
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.BLL\bin\Debug\Balancika.DAL.dll
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.BLL\bin\Debug\Balancika.DAL.pdb
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.BLL\obj\Debug\Balancika.BLL.csprojResolveAssemblyReference.cache
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.BLL\obj\Debug\Balancika.BLL.dll
+E:\My File\New\Indenting-DrugLand-Financial\Balancika.BLL\obj\Debug\Balancika.BLL.pdb

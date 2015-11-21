@@ -55,6 +55,15 @@
                                             </telerik:GridBoundColumn>
                                             <telerik:GridBoundColumn  DataField="BankName" HeaderText="Bank Name" UniqueName="colName">
                                             </telerik:GridBoundColumn>
+                                            <telerik:GridBoundColumn  DataField="ContactPerson" HeaderText="Contact Person" UniqueName="colContactPerson">
+                                            </telerik:GridBoundColumn>
+                                            <telerik:GridBoundColumn  DataField="ContactDesignation" HeaderText="Contact Designation" UniqueName="colContactDesgination">
+                                                
+                                            </telerik:GridBoundColumn>
+                                            <telerik:GridBoundColumn  DataField="ContactNo" HeaderText="Contact No" UniqueName="colContactNo">
+                                            </telerik:GridBoundColumn>
+                                            <telerik:GridBoundColumn  DataField="ContactEmail" HeaderText="Contact Email" UniqueName="colContactEmail">
+                                            </telerik:GridBoundColumn>
                                             <telerik:GridButtonColumn
                                                 CommandName="btnSelect"
                                                 HeaderText="Edit"

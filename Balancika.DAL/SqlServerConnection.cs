@@ -475,6 +475,7 @@ namespace Balancika.DAL
             sqlString = "select " + Fields + " from " + TableName;
 
             if (!string.IsNullOrEmpty(ConditionString))
+                //sqlString = sqlString + " " + ConditionString;
                 sqlString = sqlString + " " + ConditionString;
 
             DataTable dt = new DataTable();

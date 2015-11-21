@@ -37,3 +37,9 @@ E:\My File\New\Indenting-DrugLand-Financial\Balancika.DAL\bin\Debug\Balancika.DA
 E:\My File\New\Indenting-DrugLand-Financial\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
 E:\My File\New\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.dll
 E:\My File\New\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.pdb
+C:\Users\omi\Desktop\Temporary\DrugLand Indenting\Balancika.DAL\bin\Debug\Balancika.DAL.dll
+C:\Users\omi\Desktop\Temporary\DrugLand Indenting\Balancika.DAL\bin\Debug\Balancika.DAL.pdb
+C:\Users\omi\Desktop\Temporary\DrugLand Indenting\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\omi\Desktop\Temporary\DrugLand Indenting\Balancika.DAL\obj\Debug\Balancika.DAL.csprojResolveAssemblyReference.cache
+C:\Users\omi\Desktop\Temporary\DrugLand Indenting\Balancika.DAL\obj\Debug\Balancika.DAL.dll
+C:\Users\omi\Desktop\Temporary\DrugLand Indenting\Balancika.DAL\obj\Debug\Balancika.DAL.pdb

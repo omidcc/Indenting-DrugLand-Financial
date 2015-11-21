@@ -18,16 +18,7 @@
         </telerik:RadAjaxManager>
     <script>
         
-        $(document).ready(function () {
-            $('#bankTable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "scrollX": true
-            });
+       $(document).ready(function(){
             $("#form1").validate({
                 
                 rules: {

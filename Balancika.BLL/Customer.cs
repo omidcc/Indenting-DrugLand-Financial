@@ -11,6 +11,8 @@ namespace Balancika.BLL
 		private static Balancika.DAL.CustomerDal Dal = new Balancika.DAL.CustomerDal();
 		public Customer() : base()
 		{
+            
+		    
 		}
 	}
 }

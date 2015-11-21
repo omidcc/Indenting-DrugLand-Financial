@@ -36,6 +36,8 @@ namespace Balancika.BLL.Base
 
 		public System.Decimal Balance		{ get ; set; }
 
+        public  Addresses aAddress = new Addresses();
+
 
 		public  Int32 InsertCustomer()
 		{

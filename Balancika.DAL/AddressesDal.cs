@@ -11,5 +11,17 @@ namespace Balancika.DAL
 		public AddressesDal() : base()
 		{
 		}
+        public int GetMaximumAddressId()
+        {
+            try
+            {
+                int maxId = GetMaximumID("Address", "AddressId", 0, "");
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 	}
 }

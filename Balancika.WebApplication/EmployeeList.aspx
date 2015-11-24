@@ -1,20 +1,21 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="CustomerList.aspx.cs" Inherits="Balancika.CustomerList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="EmployeeList.aspx.cs" Inherits="Balancika.EmployeeList" %>
 <%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainHeader" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    
      <form id="form1" runat="server">
     <section class="form-horizontal">
         <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><b>Customer Information List</b></h3>
+                    <h3 class="box-title">Employee Information List</h3>
                 </div>
             <div class="box-body">
                 <div id="divCompanyTable" class="dataTables_wrapper form-inline dt-bootstrap">
                     
                     <div class="row">
                             <div class="col-sm-12">
-                                <asp:Button class="btn" ID="btnAddNew" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Add New Customer Information" OnClick="btnAddNew_OnClick" />        
+                                <asp:Button class="btn" ID="btnAddNew" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Add New Employee Information" OnClick="btnAddNew_OnClick" />        
                             </div>
                             
                         </div>
@@ -40,15 +41,25 @@
                                     </clientsettings>
                                     <mastertableview>
                                         <Columns>
-                                            <telerik:GridBoundColumn  DataField="CustomerId"  HeaderText="ID" UniqueName="colId" Display="False">
+                                            <telerik:GridBoundColumn  DataField="EmployeeId"  HeaderText="ID" UniqueName="colId" Display="False">
                                                 
                                             </telerik:GridBoundColumn>
                                             
-                                            <telerik:GridBoundColumn  DataField="CustomerName" HeaderText="Customer Name" UniqueName="colCustomerName">
+                                            <telerik:GridBoundColumn  DataField="EmployeeName" HeaderText="Employee Name" UniqueName="colCustomerName">
                                             </telerik:GridBoundColumn>
-                                            <telerik:GridBoundColumn  DataField="CustomerCategoryId" HeaderText="Customer Catagory" UniqueName="colCustomerCatagory">
+                                            <telerik:GridBoundColumn  DataField="EmployeeCode" HeaderText="Employee Code" UniqueName="colCustomerCatagory">
                                             </telerik:GridBoundColumn>
-                                             <telerik:GridBoundColumn  DataField="CountryName" HeaderText="Country" UniqueName="colCountryName">
+                                             
+                                            
+                                            <telerik:GridBoundColumn  DataField="DOB" HeaderText="Date of Birth" UniqueName="colAddressLine1">
+                                            </telerik:GridBoundColumn>
+                                            <telerik:GridBoundColumn  DataField="JoinDate" HeaderText="Join Date" UniqueName="colAddressLine2">
+                                            </telerik:GridBoundColumn>
+                                            <telerik:GridBoundColumn  DataField="DepartmentName" HeaderText="Department Name" UniqueName="colCity">
+                                            </telerik:GridBoundColumn>
+                                            <telerik:GridBoundColumn  DataField="DesignationName" HeaderText="Designation Name" UniqueName="colPhone">
+                                            </telerik:GridBoundColumn>
+                                              <telerik:GridBoundColumn  DataField="CountryName" HeaderText="Country" UniqueName="colCountryName">
                                             </telerik:GridBoundColumn>
                                             <telerik:GridBoundColumn  DataField="AddressLine1" HeaderText="Address Line 1" UniqueName="colAddressLine1">
                                             </telerik:GridBoundColumn>
@@ -64,9 +75,8 @@
                                             </telerik:GridBoundColumn>
                                             <telerik:GridBoundColumn  DataField="Web" HeaderText="Web" UniqueName="colWeb">
                                             </telerik:GridBoundColumn>
-                                            <telerik:GridBoundColumn  DataField="CreditLimit" HeaderText="Credit Limit" UniqueName="colCreditLimit">
                                                 
-                                            </telerik:GridBoundColumn>
+                                           
                                             
                                             <telerik:GridButtonColumn
                                                 CommandName="btnSelect"

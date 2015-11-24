@@ -12,5 +12,10 @@ namespace Balancika.BLL
 		public Employee() : base()
 		{
 		}
+
+	    public int GetMaxEmployeeId()
+	    {
+	        return dal.GetMaximumEmployeeId();
+	    }
 	}
 }

@@ -11,13 +11,30 @@ namespace Balancika
 {
     public partial class EmployeeInfo : System.Web.UI.Page
     {
+
+        private static bool isNewEntry;
+        private static int userId;
+        private List<Employee>  objEmployee=new List<Employee>();
         private Users user;
         private Company _company;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             _company = (Company)Session["Company"];
             user = (Users)Session["user"];
             this.LoadCountryDropDownList();
+            if (!isValidSession())
+            {
+                string str = Request.QueryString.ToString();
+                if (str == string.Empty)
+                {
+                    Response.Redirect("LogIn.aspx?refPage=index.aspx");
+                }
+                else
+                {
+                    Response.Redirect("LogIn.aspx?regPage=index.aspx");
+                }
+            }
             if (Session["empMessage"] != null)
             {
                 string message = Session["empMessage"].ToString();
@@ -31,6 +48,19 @@ namespace Balancika
 
         }
 
+        public bool isValidSession()
+        {
+
+            if (Session["user"] == null)
+            {
+
+                return false;
+            }
+
+            user = (Users) Session["user"];
+            return user.UserId != 0;
+
+        }
         private void LoadCountryDropDownList()
         {
             countryDropDownList.DataSource = Country.CountryList();

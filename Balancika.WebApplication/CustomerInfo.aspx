@@ -7,15 +7,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#departmentTable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "scrollX": true
-            });
+            
             $("#form1").validate({
 
                 rules: {
@@ -65,6 +57,9 @@
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Add Customer Information</h3>
+                    
+                    <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
+                     <asp:Label ID="addlblId" runat="server" Visible="False" Text=""></asp:Label>
                 </div>
                 <div class="box-body">
                     <div class="col-sm-6">
@@ -84,7 +79,7 @@
 
                         </div>
                     </div>
-                    <div class="clearfix"></div>
+                   
                     
                     
                     <div class="col-md-6">
@@ -109,7 +104,7 @@
                     </div>
                   
 
-                    <div class="clearfix"></div>
+                   
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="txtCreditLimit" class="col-sm-4 control-label">Credit Limit</label>
@@ -129,7 +124,16 @@
 
                         </div>
                     </div>
-                    <div class="clearfix"></div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label for="txtMobile" class="col-sm-4 control-label">Mobile</label>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" width="60px" name="txtMobile" id="txtMobile" placeholder="Mobile" runat="server" />
+                            </div>
+
+                        </div>
+                    </div>
+                  
                     
 
 
@@ -249,44 +253,7 @@
 
             </div>
 
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Customer List</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divCompanyTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="departmentTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>Customer Name</th>
-                                            <th>Category</th>
-                                            <th>Sales Person</th>
-                                            <th>Credit Limit</th>
-                                        
-                                            <th>Update Date</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody id="customerTblBody" runat="server">
-                                    
-                                    </tbody>
-                                    <tfoot>
-                                        <tr role="row">
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+           
         </section>
     </form>
 </asp:Content>

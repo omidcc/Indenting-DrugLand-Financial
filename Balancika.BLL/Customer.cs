@@ -14,5 +14,10 @@ namespace Balancika.BLL
             
 		    
 		}
+
+	    public int GetMaxCustomerID()
+	    {
+	        return dal.GetMaximumCustomerId();
+	    }
 	}
 }

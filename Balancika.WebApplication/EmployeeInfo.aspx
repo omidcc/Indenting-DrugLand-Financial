@@ -201,7 +201,7 @@
                             <div class="col-xs-8">
                                 <%--<input type="email" class="form-control" id="txtUpdate" name="email" placeholder="Enter a valid email address" runat="server" />
                                 --%>
-                                <telerik:RadDatePicker CssClass="form-control" ID="RadDatePicker1" runat="server" Width="100%" SelectedDate='<%# System.DateTime.Today %>'></telerik:RadDatePicker>
+                                <telerik:RadDatePicker Skin="Bootstrap"  ID="RadDatePicker1" runat="server" Width="100%" SelectedDate='<%# System.DateTime.Today %>'></telerik:RadDatePicker>
                             </div>
 
                         </div>
@@ -212,7 +212,7 @@
                             <div class="col-xs-8">
                                 <%--<input type="email" class="form-control" id="txtUpdate" name="email" placeholder="Enter a valid email address" runat="server" />
                                 --%>
-                                <telerik:RadDatePicker CssClass="form-control" ID="JoinRadDatePicker" runat="server" Width="100%" SelectedDate='<%# System.DateTime.Today %>'></telerik:RadDatePicker>
+                                <telerik:RadDatePicker Skin="Bootstrap" ID="JoinRadDatePicker" runat="server" Width="100%" SelectedDate='<%# System.DateTime.Today %>'></telerik:RadDatePicker>
                             </div>
 
                         </div>

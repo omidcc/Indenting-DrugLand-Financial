@@ -11,5 +11,17 @@ namespace Balancika.DAL
 		public EmployeeDal() : base()
 		{
 		}
+        public int GetMaximumEmployeeId()
+        {
+            try
+            {
+                int maxId = GetMaximumID("Employee", "EmployeeId", 0, "");
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 	}
 }

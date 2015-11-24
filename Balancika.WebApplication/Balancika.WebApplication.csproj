@@ -181,6 +181,7 @@
     <Content Include="dist\js\pages\dashboard.js" />
     <Content Include="dist\js\pages\dashboard2.js" />
     <Content Include="EmployeeInfo.aspx" />
+    <Content Include="EmployeeList.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\delete.png" />
     <Content Include="Images\Edit.png" />
@@ -1194,6 +1195,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="SupplierInfo.aspx" />
+    <Content Include="Temp.aspx" />
     <Content Include="UserInfo.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
@@ -1304,6 +1306,13 @@
     <Compile Include="EmployeeInfo.aspx.designer.cs">
       <DependentUpon>EmployeeInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeList.aspx.cs">
+      <DependentUpon>EmployeeList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeeList.aspx.designer.cs">
+      <DependentUpon>EmployeeList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1361,6 +1370,13 @@
     </Compile>
     <Compile Include="SupplierInfo.aspx.designer.cs">
       <DependentUpon>SupplierInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Temp.aspx.cs">
+      <DependentUpon>Temp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Temp.aspx.designer.cs">
+      <DependentUpon>Temp.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserInfo.aspx.cs">
       <DependentUpon>UserInfo.aspx</DependentUpon>

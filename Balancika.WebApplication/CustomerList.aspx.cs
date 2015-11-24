@@ -50,12 +50,24 @@ namespace Balancika
                 }
                 foreach (Customer objCst in objCustomerList)
                 {
+                    List<string> countryList = Country.CountryList();
                     List<Addresses> addressList =new Addresses().GetAllAddresses(_company.CompanyId);
                     foreach (Addresses address in addressList)
                     {
                         if (address.SourceType == "Customer" && address.SourceId == objCst.CustomerId)
                         {
-                            objCst.aAddress = address;
+                            objCst.AddressId = address.AddressId;
+                            objCst.AddressLine1 = address.AddressLine1;
+                            objCst.AddressLine2 = address.AddressLine2;
+                            objCst.AddressType = address.AddressType;
+                            objCst.City = address.City;
+                            objCst.ZipCode = address.ZipCode;
+                            objCst.Phone = address.Phone;
+                            objCst.Mobile = address.Mobile;
+                            objCst.Email = address.Email;
+                            objCst.Web = address.Web;
+                            objCst.CountryName = countryList[address.CountryId];
+                            
                             break;
                         }
                             
@@ -97,27 +109,52 @@ namespace Balancika
 
         protected void RadGrid1_OnItemCommand(object sender, GridCommandEventArgs e)
         {
-            GridDataItem item = (GridDataItem) e.Item;
-            string id = item["colId"].Text;
-            switch (e.CommandName)
+            try
             {
-                case "btnSelect":
-                    Response.Redirect("CustomerInfo.aspx?id="+id,true);
-                    break;
-                case "btnDelete":
-                    int delete = new Customer().DeleteCustomerByCustomerId(int.Parse(id));
-                    if(delete==0)
-                        Alert.Show("Data was not deleted");
-                    else
-                    {
-                        this.LoadCustomerTable();
-                    }
-                    break;
+                GridDataItem item = (GridDataItem) e.Item;
+                string id = item["colId"].Text;
+                switch (e.CommandName)
+                {
+                    case "btnSelect":
+                        Response.Redirect("CustomerInfo.aspx?id=" + id, true);
+                        break;
+                    case "btnDelete":
+                        int delete = new Customer().DeleteCustomerByCustomerId(int.Parse(id));
+                        long addressid = GetAddressID(int.Parse(id));
+                        int deleteAddress = new Addresses().DeleteAddressesByAddressId(addressid);
+                        if (delete == 0)
+                            Alert.Show("Data was not deleted");
+                        else
+                        {
+                            this.LoadCustomerTable();
+                        }
+                        break;
 
 
+                }
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex.Message);
             }
 
         }
 
+        private long GetAddressID(int parse)
+        {
+            long p=0;
+           Addresses newAddress = new Addresses();
+            List<Addresses> liAddress = newAddress.GetAllAddresses(_company.CompanyId);
+            foreach (Addresses addressese in liAddress)
+            {
+                if (addressese.SourceType == "Customer" && addressese.SourceId == parse)
+                {
+                    p = addressese.AddressId;
+                    break;
+                }
+
+            }
+            return p;
         }
+    }
     }

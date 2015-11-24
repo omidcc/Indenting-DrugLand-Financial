@@ -8,7 +8,7 @@ using Balancika.DAL;
 
 namespace Balancika.BLL.Base
 {
-	public class CustomerBase
+	public class CustomerBase : AddressesBase
 	{
 		protected static Balancika.DAL.CustomerDal dal = new Balancika.DAL.CustomerDal();
 
@@ -36,7 +36,9 @@ namespace Balancika.BLL.Base
 
 		public System.Decimal Balance		{ get ; set; }
 
-        public  Addresses aAddress = new Addresses();
+        public System.String CountryName { get; set; }
+
+        
 
 
 		public  Int32 InsertCustomer()

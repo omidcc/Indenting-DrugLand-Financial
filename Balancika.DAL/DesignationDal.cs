@@ -11,5 +11,17 @@ namespace Balancika.DAL
 		public DesignationDal() : base()
 		{
 		}
+        public int GetMaximumDesignationId()
+        {
+            try
+            {
+                int maxId = GetMaximumID("Designation", "DesignationId", 0, "");
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 	}
 }

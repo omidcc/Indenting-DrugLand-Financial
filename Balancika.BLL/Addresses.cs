@@ -12,5 +12,10 @@ namespace Balancika.BLL
 		public Addresses() : base()
 		{
 		}
+
+	    public int GetMaxAddressId()
+	    {
+	        return dal.GetMaximumAddressId();
+	    }
 	}
 }

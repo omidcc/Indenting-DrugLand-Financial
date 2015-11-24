@@ -8,7 +8,7 @@ using Balancika.DAL;
 
 namespace Balancika.BLL.Base
 {
-	public class EmployeeBase
+	public class EmployeeBase :AddressesBase
 	{
 		protected static Balancika.DAL.EmployeeDal dal = new Balancika.DAL.EmployeeDal();
 
@@ -35,6 +35,9 @@ namespace Balancika.BLL.Base
 		public System.Int32 UpdateBy		{ get ; set; }
 
 		public System.DateTime UpdateDate		{ get ; set; }
+        public System.String DepartmentName { get; set; }
+        public System.String DesignationName { get; set; }
+        public System.String CountryName { get; set; }
 
 
 		public  Int32 InsertEmployee()

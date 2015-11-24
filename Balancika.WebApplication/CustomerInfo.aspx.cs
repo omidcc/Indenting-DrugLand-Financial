@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Balancika.BLL;
+using Telerik.Licensing;
 using Telerik.Web.UI;
 
 namespace Balancika
@@ -31,14 +32,81 @@ namespace Balancika
             {
                 string str = Request.QueryString.ToString();
                 if (str == string.Empty)
-                    Response.Redirect("LogIn.aspx?refPage=default.aspx");
+                    Response.Redirect("LogIn.aspx?refPage=index.aspx");
                 else
-                    Response.Redirect("LogIn.aspx?refPage=default.aspx?" + str);
+                    Response.Redirect("LogIn.aspx?refPage=index.aspx?" + str);
             }
-           
+
             this.LoadCountryDropdown();
             this.LoadSalesPersonDropDown();
-            this.LoadCustomerTable();
+            
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["id"] != null)
+                {
+                    string customerID = Request.QueryString["id"].ToString();
+                    Customer objCustomer = new Customer().GetCustomerByCustomerId(int.Parse(customerID), _company.CompanyId);
+                    if (objCustomer != null || objCustomer.CustomerId != 0)
+                    {
+                        Addresses tempAddress = new Addresses();
+                        List<Addresses> listAdddress = tempAddress.GetAllAddresses(_company.CompanyId);
+                        foreach (Addresses addressese in listAdddress.Where(addressese => addressese.SourceId == objCustomer.CustomerId && addressese.SourceType == "Customer"))
+                        {
+                            tempAddress = addressese;
+                            break;
+                        }
+                        addlblId.Text = tempAddress.AddressId.ToString();
+                        lblId.Text = objCustomer.CustomerId.ToString();
+                        txtCustomerName.Value = objCustomer.CustomerName;
+                        txtCustomerCategory.Value = objCustomer.CustomerCategoryId.ToString();
+                        SetIndex(salesPersonDropDownList, objCustomer.SalesPersonId.ToString());
+                        countryDropDownList.SelectedIndex = tempAddress.CountryId;
+                        chkIsActive.Checked = objCustomer.IsActive;
+                        txtCreditLimit.Value = objCustomer.CreditLimit.ToString();
+                        txtAddressLine1.Value = tempAddress.AddressLine1;
+                        txtAddressLine2.Value = tempAddress.AddressLine2;
+                        txtCity.Value = tempAddress.City;
+                        txtZipCode.Value = tempAddress.ZipCode;
+                        txtPhoneNo.Value = tempAddress.Phone;
+                        txtMobile.Value = tempAddress.Mobile;
+                        txtEmail.Value = tempAddress.Email;
+                        txtWeb.Value = tempAddress.Web;
+                    }
+                }
+            }
+        }
+
+        public void ClearAll()
+        {
+            addlblId.Text =
+                lblId.Text =
+                    txtCustomerName.Value =
+                        txtCustomerCategory.Value =
+                                txtCreditLimit.Value =
+                                    txtAddressLine1.Value =
+                                        txtAddressLine2.Value =
+                                            txtCity.Value =
+                                                txtZipCode.Value =
+                                                    txtPhoneNo.Value =
+                                                        txtMobile.Value =
+                                                            txtEmail.Value =
+                                                                txtWeb.Value = "";
+            chkIsActive.Checked = false;
+        }
+
+
+        public void SetIndex(Telerik.Web.UI.RadDropDownList aDowList, string val)
+        {
+
+            for (int i = 0; i < aDowList.Items.Count; i++)
+            {
+                var li = aDowList.Items[i];
+                if (li.Value == val)
+                {
+                    aDowList.SelectedIndex = i;
+                    break;
+                }
+            }
         }
         private bool isValidSession()
         {
@@ -67,29 +135,30 @@ namespace Balancika
             salesPersonDropDownList.DataBind();
 
         }
-       
+
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             Customer objCustomer = new Customer();
+          
 
-            List<Customer> myList = objCustomer.GetAllCustomer(_company.CompanyId);
-
-            objCustomer.CustomerId = myList.Count;
+           
+            
             objCustomer.CustomerName = txtCustomerName.Value;
-            objCustomer.CustomerCategoryId =int.Parse(txtCustomerCategory.Value);
+            objCustomer.CustomerCategoryId = int.Parse(txtCustomerCategory.Value);
             objCustomer.SalesPersonId = int.Parse(salesPersonDropDownList.SelectedItem.Value);
             objCustomer.IsActive = chkIsActive.Checked;
             objCustomer.CompanyId = _company.CompanyId;
             objCustomer.CreditLimit = int.Parse(txtCreditLimit.Value);
             objCustomer.UpdateBy = _user.UserId;
-            objCustomer.UpdateDate=DateTime.Now;
+            objCustomer.UpdateDate = DateTime.Now;
 
 
 
             Addresses address = new Addresses();
-            List<Addresses> addresseses = address.GetAllAddresses(_company.CompanyId);
-            address.AddressId = addresseses.Count;
+           
+          
+           
             address.SourceType = "Customer";
             address.SourceId = _user.UserId;
             address.AddressType = "Main Address";
@@ -99,16 +168,18 @@ namespace Balancika
             address.City = txtCity.Value;
             address.ZipCode = txtZipCode.Value;
             address.Phone = txtPhoneNo.Value;
-            address.Mobile = txtPhoneNo.Value;
+            address.Mobile = txtMobile.Value;
             address.Email = txtEmail.Value;
             address.Web = txtWeb.Value;
             address.CompanyId = _company.CompanyId;
-
-
-            int chk1 = objCustomer.InsertCustomer();
-            int chk2=address.InsertAddresses();
-            if (chk1 > 0 && chk2 > 0)
+            if ((lblId.Text == "" || lblId.Text == "0") && (addlblId.Text == "" || addlblId.Text == "0"))
+            {
+                int chk1 = objCustomer.InsertCustomer();
+                int chk2 = address.InsertAddresses();
+                if (chk1 > 0 && chk2 > 0)
                 {
+                    objCustomer.CustomerId = new Customer().GetMaxCustomerID() + 1;
+                    address.AddressId = new Addresses().GetMaxAddressId() + 1;
                     Session["savedCutomerMessage"] = "Saved Successfully";
                     Response.Redirect(Request.RawUrl);
 
@@ -117,60 +188,55 @@ namespace Balancika
                 {
                     Alert.Show("Error occured while inserting customer information");
                 }
-            
-        }
-      
-        private void LoadCustomerTable()
-        {
-            try
+            }
+            else
             {
-                customerTblBody.InnerHtml = "";
-                string htmlContent = "";
-                Customer customer=new Customer();
-                List<Customer> allCustomers = customer.GetAllCustomer(_company.CompanyId);
-                foreach (Customer cust in allCustomers)
+                address.AddressId =long.Parse( addlblId.Text);
+                objCustomer.CustomerId = long.Parse(lblId.Text);
+                int check = address.UpdateAddresses();
+                check = objCustomer.UpdateCustomer();
+
+                if (check > 0)
                 {
-                    htmlContent += "<tr>";
-                    htmlContent += String.Format(@"<th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th>", cust.CustomerName, cust.CustomerCategoryId, cust.SalesPersonId,cust.CreditLimit, cust.UpdateDate);
-                    htmlContent += "</tr>";
+                    Response.Redirect("CustomerList.aspx", true);
                 }
 
-                customerTblBody.InnerHtml += htmlContent;
             }
-            catch (Exception exc)
-            {
-                Alert.Show(exc.Message);
-            }
+
+           
+
         }
+
+       
 
         private void Clear()
         {
-           
+
         }
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void companyIdDropDownList_ItemSelected(object sender, DropDownListEventArgs e)
         {
-           
+
         }
 
         protected void companyIdDropDownList_SelectedIndexChanged(object sender, DropDownListEventArgs e)
         {
-           
+
         }
 
         protected void countryDropDownList_ItemSelected(object sender, DropDownListEventArgs e)
         {
-           
+
         }
 
         protected void countryDropDownList_SelectedIndexChanged(object sender, DropDownListEventArgs e)
         {
-           
+
         }
     }
 }

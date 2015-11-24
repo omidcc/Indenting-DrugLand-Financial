@@ -40,6 +40,24 @@ namespace Balancika {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtDepartmentName;
         
         /// <summary>
+        /// RadAjaxPanel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadAjaxPanel RadAjaxPanel2;
+        
+        /// <summary>
+        /// ParentDepartmentDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadDropDownList ParentDepartmentDropDownList;
+        
+        /// <summary>
         /// chkIsActive control.
         /// </summary>
         /// <remarks>

@@ -49,3 +49,9 @@ G:\Balancika\Indenting-DrugLand-Financial\Balancika.DAL\bin\Debug\Microsoft.Web.
 G:\Balancika\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.dll
 G:\Balancika\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.pdb
 G:\Balancika\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.csprojResolveAssemblyReference.cache
+F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.DAL\bin\Debug\Balancika.DAL.dll
+F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.DAL\bin\Debug\Balancika.DAL.pdb
+F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.csprojResolveAssemblyReference.cache
+F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.dll
+F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.DAL\obj\Debug\Balancika.DAL.pdb

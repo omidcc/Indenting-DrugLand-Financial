@@ -22,7 +22,7 @@ namespace Balancika
         {
             _company = (Company)Session["Company"];
             user = (Users)Session["user"];
-            this.LoadCountryDropDownList();
+            
             if (!isValidSession())
             {
                 string str = Request.QueryString.ToString();
@@ -32,7 +32,7 @@ namespace Balancika
                 }
                 else
                 {
-                    Response.Redirect("LogIn.aspx?regPage=index.aspx");
+                    Response.Redirect("LogIn.aspx?regPage=index.aspx"+str);
                 }
             }
             if (Session["empMessage"] != null)
@@ -43,8 +43,8 @@ namespace Balancika
             }
             this.LoadCountryDropDownList();
             this.LoadDepartmentDropDownList();
-            this.LoadDesignationDropDownList();
-            this.Show();
+            //this.LoadDesignationDropDownList();
+            
 
         }
 
@@ -68,16 +68,7 @@ namespace Balancika
             countryDropDownList.DataBind();
         }
 
-        public void LoadDesignationDropDownList()
-        {
-            Designation newDeg = new Designation();
-            
-            List<Designation> newDegList = newDeg.GetAllDesignation(_company.CompanyId);
-            designationDropDownList.DataSource = newDegList;
-            designationDropDownList.DataTextField = "Designation";
-            designationDropDownList.DataValueField = "DesignationId";
-            designationDropDownList.DataBind();
-        }
+      
 
         public void LoadDepartmentDropDownList()
         {
@@ -99,40 +90,15 @@ namespace Balancika
             
         }
 
-        public void Show()
-        {
-
-
-            try
-            {
-                CompanyTableBody.InnerHtml = "";
-                string htmlContent = "";
-                List<Employee> departmentList = new List<Employee>();
-                Employee aDepartment = new Employee();
-                departmentList = aDepartment.GetAllEmployee(_company.CompanyId);
-                foreach (Employee aDepo in departmentList)
-                {
-                    
-                    htmlContent += "<tr>";
-
-
-                    htmlContent += String.Format(@"<th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th><th>{5}</th></tr>", aDepo.EmployeeCode, aDepo.EmployeeName, aDepo.Address, aDepo.DOB, aDepo.JoinDate, aDepo.IsActive);
-                    htmlContent += "</tr>";
-                }
-                CompanyTableBody.InnerHtml += htmlContent;
-
-            }
-            catch (Exception exp)
-            {
-                Alert.Show(exp.Message);
-            }
-
-        }
+       
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
+                Designation newDesignation = new Designation();
+                
+
                 bool chk = false;
                 Employee aEmployee = new Employee();
                 Addresses aAddresses=new Addresses();
@@ -170,7 +136,7 @@ namespace Balancika
                 aEmployee.EmployeeName = txtEmployeeName.Value;
                 aEmployee.DOB = RadDatePicker1.SelectedDate.ToString();
                 aEmployee.JoinDate = JoinRadDatePicker.SelectedDate.ToString();
-                aEmployee.DesignationId = int.Parse(designationDropDownList.SelectedItem.ToString());
+                
                 aEmployee.DepartmentId = int.Parse(departmentDropDownList.SelectedItem.ToString());
                 aAddresses.SourceId = id;
                 aEmployee.Address = "Main Address";

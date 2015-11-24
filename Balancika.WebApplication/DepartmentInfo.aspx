@@ -66,8 +66,31 @@
                             </div>
                         </div>
                     </div>
+                    
+                     <div class="col-md-6">
+                        <div class="form-group ">
+                            <label for="ParentDepartmentDropDownList" class="col-sm-4 control-label">Parent ID</label>
+                            <div class="col-xs-8">
+                                <%--<input type="email" class="form-control" id="txtUpdate" name="email" placeholder="Enter a valid email address" runat="server" />
+                                --%>
+                                <telerik:RadAjaxPanel ID="RadAjaxPanel2" runat="server">
+                                    <telerik:RadDropDownList ID="ParentDepartmentDropDownList"
+                                        name="chartOfAccountTypeDropDownList"
+
+                                        runat="server" padding-left="20px"
+                                        Width="100%"
+                                        AutoPostBack="true"
+                                        DefaultMessage="Select Parent ID"
+                                        Skin="Bootstrap">
+                                    </telerik:RadDropDownList>
+
+                                </telerik:RadAjaxPanel>
+                            </div>
+
+                        </div>
+                    </div>
                    
-                    <div class="clearfix"></div>
+                   
 
                    <%-- <div class="col-md-6">
                         <div class="form-group ">
@@ -91,7 +114,6 @@
                     </div>--%>
                     <div class="clearfix"></div>
 
-                    <div class="clearfix"></div>
 
 
 

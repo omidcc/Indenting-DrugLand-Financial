@@ -20,6 +20,19 @@ namespace Balancika
         protected void Page_Load(object sender, EventArgs e)
         {
             _company = (Company)Session["Company"];
+            if (!isValidSession())
+            {
+                string str = Request.QueryString.ToString();
+                if (str == string.Empty)
+                {
+                    Response.Redirect("LogIn.aspx?refPage=index.aspx");
+
+                }
+                else
+                {
+                    Response.Redirect("LogIn.aspx?refPage=index.aspx?" + str);
+                }
+            }
 
             if (Session["savedDepartmentMessage"] != null)
             {
@@ -29,19 +42,22 @@ namespace Balancika
             }
             user = (Users)Session["user"];
 
-          this.LoadCompanyList();
 
             this.LoadDepartmentDropDownList();
+            this.LoadParentDepartmentIdDropDown();
         }
 
-
-
-        public void LoadCompanyList()
+        public bool isValidSession()
         {
-            Company aCompany = new Company();
-
-            companyList = aCompany.GetAllCompany();
+            if (Session["user"] == null)
+                return false;
+            user = (Users) Session["user"];
+            return user.UserId != 0;
         }
+
+
+
+       
 
         public void LoadDepartmentDropDownList()
         {
@@ -96,7 +112,10 @@ namespace Balancika
                 Department tempDepartment = departmentList[departmentList.Count - 1];
                 int id = tempDepartment.DepartmentId + 1;
                 aDepartmnent.DepartmentId = id;
-                aDepartmnent.ParentDepartmentId = id;
+                if (ParentDepartmentDropDownList.SelectedItem.Value != null)
+                    aDepartmnent.ParentDepartmentId = int.Parse(ParentDepartmentDropDownList.SelectedItem.Value);
+                else
+                    aDepartmnent.ParentDepartmentId = id;
 
                 aDepartmnent.DepartmentName = txtDepartmentName.Value;
 
@@ -138,6 +157,21 @@ namespace Balancika
                 "";
 
             chkIsActive.Checked = false;
+        }
+
+        void LoadParentDepartmentIdDropDown()
+        {
+            Department dep=new Department();
+            List<Department> depList = dep.GetAllDepartment(_company.CompanyId);
+            List<int> idList = new List<int>();
+
+            foreach (Department depoo in depList)
+            {
+               
+                idList.Add(depoo.ParentDepartmentId);
+            }
+            ParentDepartmentDropDownList.DataSource = idList.Distinct();
+            ParentDepartmentDropDownList.DataBind();
         }
 
     }

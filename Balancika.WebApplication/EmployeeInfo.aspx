@@ -22,20 +22,28 @@
                         required: true
                     },
                     '<%=txtEmail.UniqueID%>': {
+                        required:true,
                         email: true
                     },
 
                     '<%=txtEmployeeCode.UniqueID%>': {
                         required: true
-                    }
+                    },
+                     '<%=txtDesignationName.UniqueID%>': {
+                        required: true
+                     }
                 },
                 messages: {
                     '<%=txtEmployeeName.UniqueID%>': {
                         required: "Company Name is required"
                     },
                     '<%=txtEmail.UniqueID%>': {
+                        required: "Please enter email address",
                         email: "Please enter valid email address"
-                    }
+                    },
+                     '<%=txtDesignationName.UniqueID%>': {
+                            required: "Please enter designation name"
+                     }
                 }
 
             });
@@ -70,20 +78,14 @@
                     </div>
                    <div class="col-md-6">
                         <div class="form-group ">
-                            <label for="designationDropDownList" class="col-sm-4 control-label">Designation</label>
+                            <label for="txtDesignationName" class="col-sm-4 control-label">Designation</label>
                             <div class="col-xs-8">
                                 <%--<input type="email" class="form-control" id="txtUpdate" name="email" placeholder="Enter a valid email address" runat="server" />
                                 --%>
-                                <telerik:RadAjaxPanel ID="RadAjaxPanel3" runat="server">
-                                    <telerik:RadDropDownList ID="designationDropDownList"
-                                        Skin="Bootstrap"
-                                        runat="server" padding-left="20px"
-                                        Width="100%"
-                                        AutoPostBack="true"
-                                        DefaultMessage="Select Designation">
-                                    </telerik:RadDropDownList>
-
-                                </telerik:RadAjaxPanel>
+                                 <div class="col-xs-8">
+                                 <input type="text" class="form-control" width="60px" name="txtDesignationName" id="txtDesignationName" placeholder="Designation Name" runat="server" />
+                                 </div>
+                                
                             </div>
 
                         </div>
@@ -241,40 +243,7 @@
                 </div>
 
             </div>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Employee List</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divCompanyTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="box-body">
-                            <div class="col-sm-12">
-                                <table id="CompanyTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>Employee Code</th>
-                                            <th>Employee Name</th>
-                                            <th>Address Type</th>
-                                            <th>Date Of Birth</th>
-                                            <th>Join Date</th>
-                                            <th>Is Active</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="CompanyTableBody" runat="server">
-                                    </tbody>
-                                    <tfoot>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+           
         </section>
     </form>
 </asp:Content>

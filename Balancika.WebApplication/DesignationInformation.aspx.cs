@@ -14,18 +14,51 @@ namespace Balancika
 
         private bool isNewEntry;
         private Users user;
+        private static int userId;
+        private List<Designation> objDesignationList = new List<Designation>();
+        private Company _company = new Company();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            _company = (Company) Session["Company"];
+            if (!isValidSession())
+            {
+                string str = Request.QueryString.ToString();
+                if (str == string.Empty)
+                    Response.Redirect("LogIn.aspx?refPage=index.aspx");
+                else
+                    Response.Redirect("LogIn.aspx?refPage=index.aspx?" + str);
+            }
             if (!IsPostBack)
             {
                 user = (Users)Session["user"];
 
                 this.Clear();
                 
-                this.LoadCompanyDropDownList();
+              
                
             }
-            
+            this.LoadDesignationTable();
+
+        }
+
+        private void LoadDesignationTable()
+        {
+            Designation newDesignation = new Designation();
+            objDesignationList = newDesignation.GetAllDesignation(_company.CompanyId);
+            RadGrid1.DataSource = objDesignationList;
+            RadGrid1.Rebind();
+
+        }
+
+        private bool isValidSession()
+        {
+            if (Session["user"] == null)
+            {
+                return false;
+            }
+            user = (Users) Session["user"];
+            return user.UserId != 0;
         }
         protected void RadDropDownList1_ItemSelected(object sender, DropDownListEventArgs e)
         {
@@ -72,14 +105,15 @@ namespace Balancika
             {
                 Designation aDesignation = new Designation();
                 aDesignation.Designation = txtDesignation.Value;
-                aDesignation.CompanyId = int.Parse(companyIdRadDropDownList1.SelectedItem.Value);
-                aDesignation.DepartmentId = int.Parse(departmentIdRadDropDownList.SelectedItem.Value);
+                aDesignation.CompanyId = _company.CompanyId;
+                aDesignation.DepartmentId = departmentIdRadDropDownList.SelectedIndex >= -1 ? int.Parse(departmentIdRadDropDownList.SelectedItem.Value) : 0;
                 aDesignation.UpdateDate = DateTime.Now;
-                //aDesignation.UpdateBy = user.UserId;
-                aDesignation.UpdateBy = 1;
+                aDesignation.UpdateBy = user.UserId;
+               // aDesignation.UpdateBy = user.User;
                 aDesignation.IsActive = chkIsActive.Checked;
                int success= aDesignation.InsertDesignation();
                 Alert.Show(success>0?"Designation Saved Successfully":"Something Error Happened");
+                this.LoadDesignationTable();
 
 
 
@@ -96,16 +130,7 @@ namespace Balancika
 
         }
 
-        public void LoadCompanyDropDownList()
-        {
-            List<Company> companyList=new List<Company>();
-            Company aCompany=new Company();
-            companyList = aCompany.GetAllCompany();
-            companyIdRadDropDownList1.DataSource = companyList;
-            companyIdRadDropDownList1.DataTextField = "CompanyName";
-            companyIdRadDropDownList1.DataValueField = "CompanyId";
-            companyIdRadDropDownList1.DataBind();
-        }
+       
         
         public void LoadDepartmentDropDownList()
         {
@@ -117,6 +142,11 @@ namespace Balancika
             departmentIdRadDropDownList.DataTextField = "DepartmentName";
             departmentIdRadDropDownList.DataValueField = "DepartmentId";
             departmentIdRadDropDownList.DataBind();
+        }
+
+        protected void RadGrid1_OnItemCommand(object sender, GridCommandEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

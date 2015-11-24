@@ -1287,7 +1287,6 @@
     </Compile>
     <Compile Include="DepartmentInfo.aspx.cs">
       <DependentUpon>DepartmentInfo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DepartmentInfo.aspx.designer.cs">
       <DependentUpon>DepartmentInfo.aspx</DependentUpon>

@@ -92,7 +92,60 @@ namespace Balancika
 
         private void LoadEmployeeListTable()
         {
-           
+            try
+            {
+                Addresses tempAddres = new Addresses();
+                Designation tempDesignation = new Designation();
+                Department tempDepartment = new Department();
+                Employee objEmployee = new Employee();
+                List<Employee> objEmployeeList = objEmployee.GetAllEmployee(_company.CompanyId);
+                foreach (Employee employee in objEmployeeList)
+                {
+
+                    List<Addresses> objAddressList = tempAddres.GetAllAddresses(_company.CompanyId);
+                    Designation aDesignation = tempDesignation.GetDesignationByDesignationId(employee.DesignationId,_company.CompanyId);
+                    Department aDepartment = tempDepartment.GetDepartmentByDepartmentId(employee.DepartmentId,
+                        _company.CompanyId);
+                    employee.DepartmentName = aDepartment.DepartmentName;
+                    employee.DesignationName = aDesignation.Designation;
+                    List<string> countrList = Country.CountryList();
+                    
+
+                    foreach (Addresses anAddresses in objAddressList)
+                    {
+                        if (anAddresses.SourceType == "Employee" && anAddresses.SourceId == employee.EmployeeId)
+                        {
+                            employee.AddressLine1 = anAddresses.AddressLine1;
+                            employee.AddressLine2 = anAddresses.AddressLine2;
+                            employee.City = anAddresses.City;
+                            employee.ZipCode = anAddresses.ZipCode;
+                            employee.Phone = anAddresses.Phone;
+                            employee.Mobile = anAddresses.Mobile;
+                            employee.Email = anAddresses.Email;
+                            employee.CountryName = countrList[anAddresses.CountryId];
+                            break;
+                            
+                        }
+                        
+
+                    }
+                    RadGrid1.DataSource = objEmployeeList;
+                    RadGrid1.Rebind();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex.Message);
+            }
+
+        }
+        private long GetAddressID(int parse)
+        {
+            Addresses newAddress = new Addresses();
+            List<Addresses> liAddress = newAddress.GetAllAddresses(_company.CompanyId);
+            return (from addressese in liAddress where addressese.SourceType == "Employee" && addressese.SourceId == parse select addressese.AddressId).FirstOrDefault();
         }
     }
 }

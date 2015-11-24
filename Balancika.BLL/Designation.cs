@@ -12,5 +12,10 @@ namespace Balancika.BLL
 		public Designation() : base()
 		{
 		}
+
+	    public int GetMaxdesignationID()
+	    {
+	        return dal.GetMaximumDesignationId();
+	    }
 	}
 }

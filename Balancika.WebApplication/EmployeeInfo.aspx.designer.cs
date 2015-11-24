@@ -49,22 +49,13 @@ namespace Balancika {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtEmployeeName;
         
         /// <summary>
-        /// RadAjaxPanel3 control.
+        /// txtDesignationName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxPanel RadAjaxPanel3;
-        
-        /// <summary>
-        /// designationDropDownList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadDropDownList designationDropDownList;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDesignationName;
         
         /// <summary>
         /// RadAjaxPanel2 control.
@@ -191,14 +182,5 @@ namespace Balancika {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button button1;
-        
-        /// <summary>
-        /// CompanyTableBody control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CompanyTableBody;
     }
 }

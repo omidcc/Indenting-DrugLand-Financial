@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="DesignationInformation.aspx.cs" Inherits="Balancika.DesignationInformation" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="DesignationInformation.aspx.cs" Inherits="Balancika.DesignationInformation" enableEventValidation="false" %>
 <%@ Register TagPrefix="telerik1" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4" %>
 <%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI.Skins" Assembly="Telerik.Web.UI.Skins, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainHeader" runat="server">
@@ -7,20 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
       <script>
           $(document).ready(function () {
-    $("#form1").validate({
-                  rules: {
-                      '<%=txtDesignation.UniqueID%>': {
-                        required: true
-                    }
-                },
-                messages: {
-                    '<%=txtDesignation.UniqueID%>': {
-                        required: "Enter Designation Name"
-                    }
-
-                }
-
-            });
+   
 
         });
 
@@ -35,29 +22,15 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Add /Edit Designation</h3>
             </div>
+             <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
             <div class="box-body">
 
                 <div class="col-md-6">
                     <div class="form-group ">
-                        <label for="companyIdRadDropDownList1" class="col-sm-4 control-label">Company</label>
-                        <div class="col-xs-8">
-                            <%--<input type="email" class="form-control" id="txtUpdate" name="email" placeholder="Enter a valid email address" runat="server" />
-                            --%>
-                            
-                                <telerik1:RadDropDownList ID="companyIdRadDropDownList1"
-                                    name="companyIdRadDropDownList1"
-                                    Skin="Bootstrap"
-                                    runat="server" padding-left="20px"
-                                    Width="100%"
-                                    CausesValidation="false"
-                                    AutoPostBack="true" 
-                                    
-                                    OnItemSelected="RadDropDownList1_ItemSelected"
-                                    
-                                    OnSelectedIndexChanged="RadDropDownList1_SelectedIndexChanged">
-                                </telerik1:RadDropDownList>
+                        <label for="txtDesignationName" class="col-sm-4 control-label">Designation</label>
+                       <div class="col-xs-8">
+                            <input type="text" class="form-control" id="txtDesignationName" name="txtDesignation" placeholder="Designation" runat="server" />
 
-                            
                         </div>
 
                     </div>
@@ -100,17 +73,7 @@
                     </div>
                 </div>--%>
 
-                <div class="col-md-6">
-                    <div class="form-group ">
-                        <label for="txtDesignation" class="col-sm-4 control-label">Designation</label>
-                        <div class="col-xs-8">
-                            <input type="text" class="form-control" id="txtDesignation" name="txtDesignation" placeholder="Designation" runat="server" />
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="clearfix"></div>
+                
 
               <%--  <div class="col-md-6">
                     <div class="form-group ">

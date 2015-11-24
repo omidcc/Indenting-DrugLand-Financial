@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -39,7 +40,39 @@ namespace Balancika
                
             }
             this.LoadDesignationTable();
+            this.LoadDepartmentDropDownList();
+            if (!IsPostBack)
+            {
+                if (Session["colDesignationId"] != null)
+                {
+                    string designationID = Session["colDesignationId"].ToString();
+                    Designation objDesignation=new Designation().GetDesignationByDesignationId(int.Parse(designationID),_company.CompanyId);
+                    if (objDesignation != null || objDesignation.DepartmentId != 0)
+                    {
+                        Department aDepartment=new Department().GetDepartmentByDepartmentId(objDesignation.DesignationId,_company.CompanyId);
+                    }
+                    txtDesignationName.Value = objDesignation.Designation;
+                    SetIndex(departmentIdRadDropDownList,objDesignation.DepartmentId.ToString());
 
+                    
+
+                }
+            }
+
+        }
+
+        public void SetIndex(Telerik.Web.UI.RadDropDownList aDowList, string val)
+        {
+
+            for (int i = 0; i < aDowList.Items.Count; i++)
+            {
+                var li = aDowList.Items[i];
+                if (li.Value == val)
+                {
+                    aDowList.SelectedIndex = i;
+                    break;
+                }
+            }
         }
 
         private void LoadDesignationTable()
@@ -104,7 +137,7 @@ namespace Balancika
             try
             {
                 Designation aDesignation = new Designation();
-                aDesignation.Designation = txtDesignation.Value;
+                aDesignation.Designation = txtDesignationName.Value;
                 aDesignation.CompanyId = _company.CompanyId;
                 aDesignation.DepartmentId = departmentIdRadDropDownList.SelectedIndex >= -1 ? int.Parse(departmentIdRadDropDownList.SelectedItem.Value) : 0;
                 aDesignation.UpdateDate = DateTime.Now;
@@ -146,7 +179,33 @@ namespace Balancika
 
         protected void RadGrid1_OnItemCommand(object sender, GridCommandEventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                string id = item["colId"].Text;
+                switch (e.CommandName)
+                {
+                    case "btnSelect":
+                    {
+                        Session["colDesignationId"] = id;
+                        Response.Redirect(Request.RawUrl);
+                        break;
+                    }
+                    case "btnDelete":
+                        int del = new Department().DeleteDepartmentByDepartmentId(int.Parse(id));
+                        if(del==0)
+                            Alert.Show("Data is not deleted");
+                        else
+                        {
+                                this.LoadDesignationTable();
+                        }
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex.Message);
+            }
         }
     }
 }

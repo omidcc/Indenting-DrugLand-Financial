@@ -7,15 +7,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#CompanyTable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "scrollX": true
-            });
+          
             $("#form1").validate({
                 rules: {
                     '<%=txtEmployeeName.UniqueID%>': {
@@ -28,10 +20,7 @@
 
                     '<%=txtEmployeeCode.UniqueID%>': {
                         required: true
-                    },
-                     '<%=txtDesignationName.UniqueID%>': {
-                        required: true
-                     }
+                    }
                 },
                 messages: {
                     '<%=txtEmployeeName.UniqueID%>': {
@@ -40,10 +29,7 @@
                     '<%=txtEmail.UniqueID%>': {
                         required: "Please enter email address",
                         email: "Please enter valid email address"
-                    },
-                     '<%=txtDesignationName.UniqueID%>': {
-                            required: "Please enter designation name"
-                     }
+                    }
                 }
 
             });
@@ -58,6 +44,10 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Add /Edit Employee Information</h3>
                 </div>
+                <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
+                     <asp:Label ID="addlblId" runat="server" Visible="False" Text=""></asp:Label>
+                <asp:Label ID="depID" runat="server" Visible="False" Text=""></asp:Label>
+                     <asp:Label ID="desID" runat="server" Visible="False" Text=""></asp:Label>
                 <div class="box-body">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -78,14 +68,21 @@
                     </div>
                    <div class="col-md-6">
                         <div class="form-group ">
-                            <label for="txtDesignationName" class="col-sm-4 control-label">Designation</label>
+                            <label for="designationDropDownList" class="col-sm-4 control-label">Designation</label>
                             <div class="col-xs-8">
                                 <%--<input type="email" class="form-control" id="txtUpdate" name="email" placeholder="Enter a valid email address" runat="server" />
                                 --%>
-                                 <div class="col-xs-8">
-                                 <input type="text" class="form-control" width="60px" name="txtDesignationName" id="txtDesignationName" placeholder="Designation Name" runat="server" />
-                                 </div>
-                                
+                                <telerik:RadAjaxPanel ID="RadAjaxPanel3" runat="server">
+                                    <telerik:RadDropDownList ID="designationDropDownList"
+                                        Skin="Bootstrap"
+                                        runat="server" padding-left="20px"
+                                        Width="100%"
+                                        AutoPostBack="true"
+                                       
+                                        DefaultMessage="Select Designation">
+                                    </telerik:RadDropDownList>
+
+                                </telerik:RadAjaxPanel>
                             </div>
 
                         </div>
@@ -96,8 +93,8 @@
                             <div class="col-xs-8">
                                 <%--<input type="email" class="form-control" id="txtUpdate" name="email" placeholder="Enter a valid email address" runat="server" />
                                 --%>
-                                <telerik:RadAjaxPanel ID="RadAjaxPanel2" runat="server">
-                                    <telerik:RadDropDownList ID="departmentDropDownList"
+                                
+                                    <telerik:RadDropDownList ID="departmentDropDownList" OnSelectedIndexChanged="departmentDropDownList_IndexChanged"
                                         Skin="Bootstrap"
                                         runat="server" padding-left="20px"
                                         Width="100%"
@@ -105,13 +102,13 @@
                                         DefaultMessage="Select Department">
                                     </telerik:RadDropDownList>
 
-                                </telerik:RadAjaxPanel>
+                              
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="clearfix"></div>
+                    
                     <div class="col-md-6">
                         <div class="form-group ">
                             <label for="txtPhoneNo" class="col-sm-4 control-label">Phone Number</label>
@@ -123,7 +120,7 @@
                     </div>
 
                     
-                    <div class="clearfix"></div>
+                  
 
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -143,7 +140,7 @@
 
                         </div>
                     </div>
-                    <div class="clearfix"></div>
+                   
                     <div class="col-md-6">
                         <div class="form-group ">
                             <label for="countryDropDownList" class="col-sm-4 control-label">Country</label>

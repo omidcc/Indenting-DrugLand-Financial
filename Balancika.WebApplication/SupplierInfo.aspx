@@ -8,27 +8,29 @@
 
     <script>
         $(document).ready(function () {
-            $('#departmentTable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "scrollX": true
-            });
+
             $("#form1").validate({
 
                 rules: {
 
                     '<%=txtSupplierName.UniqueID%>': {
                         required: true,
+                    },
+                    '<%=txtTotalCredit.UniqueID%>': {
+                        required: true
 
+                    },
+                    '<%=txtTotalDebit.UniqueID%>': {
+                        required: true
+
+                    },
+                    
+                    '<%=txtEmail.UniqueID%>': {
+                        required: true,
+                        email: true
 
                     }
-
-
-
+                    
 
                 },
                 messages: {
@@ -38,8 +40,22 @@
                         required: "Please enter supplier name",
 
 
+                    },
+                    '<%=txtEmail.UniqueID%>': {
+                        required: "Please Enter Email Address",
+                        email: "Valid Email Address Please"
+
+                    },
+                    '<%=txtTotalCredit.UniqueID%>': {
+                        required: "Total Credit is Required"
+
+                    },
+                    '<%=txtTotalDebit.UniqueID%>': {
+                        required: "Total Debit is Required"
+
                     }
-                    
+              
+
                 }
             });
 
@@ -54,6 +70,8 @@
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Add Supplier Information</h3>
+                     <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
+                    <asp:Label ID="addlblId" runat="server" Visible="False" Text=""></asp:Label>
                 </div>
                 <div class="box-body">
                     <div class="col-sm-6">
@@ -66,7 +84,7 @@
                     </div>
 
 
-                
+
 
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -77,7 +95,7 @@
 
                         </div>
                     </div>
-                        <div class="clearfix"></div>
+                    <div class="clearfix"></div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="txtAddressLine2" class="col-sm-4 control-label">Address Line 2</label>
@@ -110,7 +128,8 @@
 
                         </div>
                     </div>
-                     <div class="col-sm-6">
+                   
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label for="txtCity" class="col-sm-4 control-label">City</label>
                             <div class="col-xs-8">
@@ -125,6 +144,42 @@
                             <label for="txtZipCode" class="col-sm-4 control-label">Zip Code</label>
                             <div class="col-xs-8">
                                 <input type="text" class="form-control" width="60px" name="txtZipCode" id="txtZipCode" placeholder="Zip Code" runat="server" />
+                            </div>
+
+                        </div>
+                    </div>
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="txtPhone" class="col-sm-4 control-label">Phone</label>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" width="60px" name="txtPhone" id="txtPhone" placeholder="Phone" runat="server" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="txtMobile" class="col-sm-4 control-label">Mobile</label>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" width="60px" name="txtMobile" id="txtMobile" placeholder="Mobile" runat="server" />
+                            </div>
+
+                        </div>
+                    </div>
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="txtEmail" class="col-sm-4 control-label">Email</label>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" width="60px" name="txtEmail" id="txtEmail" placeholder="Email" runat="server" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="txtWeb" class="col-sm-4 control-label">Web</label>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" width="60px" name="txtWeb" id="txtWeb" placeholder="Web Address" runat="server" />
                             </div>
 
                         </div>
@@ -171,7 +226,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <asp:Button ID="button1" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Save User Information" OnClientClick="return validate()" OnClick="btnSave_Click" />
+                            <asp:Button ID="button1" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Save Supplier Information" OnClientClick="return validate()" OnClick="btnSave_Click" />
                             <input class="btn btn-warning" runat="server" type="button" value="Clear Information" onserverclick="btnClear_Click" />
 
                         </div>
@@ -180,45 +235,7 @@
 
             </div>
 
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Supplier List</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divCompanyTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="departmentTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-
-                                            <th>Supplier Name</th>
-                                            <th>Is Active</th>
-                                            <th>Update Date</th>
-                                            <th>Total Debit</th>
-                                            <th>Total Credit</th>
-                                           
-                                            
-
-                                        </tr>
-                                    </thead>
-                                    <tbody id="suplierTableBody" runat="server">
-                                    
-                                    </tbody>
-
-                                    <tfoot>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            
         </section>
     </form>
 

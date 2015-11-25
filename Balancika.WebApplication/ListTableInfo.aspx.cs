@@ -12,21 +12,54 @@ namespace Balancika
     public partial class ListTableInfo : System.Web.UI.Page
     {
         private bool isNewEntry;
-        private Users user;
+        private Users _user;
         private Company _company = new Company();
         protected void Page_Load(object sender, EventArgs e)
         {
             _company = (Company)Session["Company"];
-              user =(Users) Session["user"];
+              _user =(Users) Session["user"];
               if (Session["savedListMessage"] !=null)
               {
                   string msg = Session["savedListMessage"].ToString();
                   Alert.Show(msg);
                   Session["savedListMessage"] = null;
               }
+              if (!isValidSession())
+              {
+                  string str = Request.QueryString.ToString();
+                  if (str == string.Empty)
+                      Response.Redirect("LogIn.aspx?refPage=index.aspx");
+                  else
+                      Response.Redirect("LogIn.aspx?refPage=index.aspx?" + str);
+              }
+              if (!IsPostBack)
+              {
+                  if (Request.QueryString["id"] != null)
+                  {
+                      string listId = Request.QueryString["id"].ToString();
+
+                      ListTable objTable = new ListTable().GetListTableById(int.Parse(listId), _company.CompanyId);
+                      if (objTable != null || objTable.Id != 0)
+                      {
+                          lblId.Text = objTable.Id.ToString();
+                          txtListType.Value = objTable.ListType;
+                          txtListValue.Value = objTable.ListValue;
+                      }
+                  }
+              }
             
-            this.GetAllListTable();
-            this.LoadListTable();
+           
+        }
+        private bool isValidSession()
+        {
+            if (Session["user"] == null)
+            {
+                return false;
+            }
+
+            _user = (Users)Session["user"];
+
+            return _user.UserId != 0;
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -51,20 +84,31 @@ namespace Balancika
                 myListTable.CompanyId = _company.CompanyId;
 
                 myListTable.IsActive = true;
-                myListTable.UpdateBy = user.UserId;
+                myListTable.UpdateBy = _user.UserId;
                 myListTable.UpdateDate = DateTime.Now;
 
-                int success = myListTable.InsertListTable();
-
-                if (success > 0)
+                int sucess = 0;
+                if (lblId.Text == "" || lblId.Text == "0")
                 {
-                    Session["savedListMessage"] = "Saved List Table Successfully";
-                    Response.Redirect(Request.RawUrl);
+                    myListTable.Id = new ListTable().GetMaxListTableId() + 1;
 
+                    sucess = myListTable.InsertListTable();
+
+                    if (sucess > 0)
+                    {
+                        Alert.Show("List Table saved successfully");
+                        this.Clear();
+                    }
                 }
                 else
                 {
-                    Alert.Show("Error Occured while inserting a new List Table");
+                    myListTable.Id = int.Parse(lblId.Text);
+                    sucess = myListTable.UpdateListTable();
+
+                    if (sucess > 0)
+                    {
+                        Response.Redirect("ListTableLists.aspx", true);
+                    }
                 }
             }
             catch (Exception exp)
@@ -76,32 +120,12 @@ namespace Balancika
 
         }
 
-       List<ListTable>myList=new List<ListTable>();
-        void GetAllListTable()
-        {
-            ListTable listTable = new ListTable();
-            myList = listTable.GetAllListTable(_company.CompanyId);
-        }
 
-        void LoadListTable()
+        private void Clear()
         {
-            try
-            {
-                ListTableBody.InnerHtml = "";
-                string htmlContent = "";
-                foreach (ListTable list in myList)
-                {
-                    htmlContent += "<tr>";
-                    htmlContent += String.Format(@"<th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th>",list.ListType,list.ListId,list.ListValue,list.IsActive,list.UpdateDate );
-                    htmlContent += "</tr>";
-                }
-
-                ListTableBody.InnerHtml += htmlContent;
-            }
-            catch (Exception exc)
-            {
-                Alert.Show(exc.Message);
-            }
+            lblId.Text = "";
+            txtListType.Value = "";
+            txtListValue.Value = "";
         }
 
         protected void btnClear_Click(object sender, EventArgs e)

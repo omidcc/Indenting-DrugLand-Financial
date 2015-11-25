@@ -8,7 +8,7 @@ using Balancika.DAL;
 
 namespace Balancika.BLL.Base
 {
-	public class SupplierBase
+	public class SupplierBase: AddressesBase
 	{
 		protected static Balancika.DAL.SupplierDal dal = new Balancika.DAL.SupplierDal();
 
@@ -27,8 +27,10 @@ namespace Balancika.BLL.Base
 		public System.Decimal TotalDebit		{ get ; set; }
 
 		public System.Decimal TotalCredit		{ get ; set; }
+	    public System.String CountryName { get; set; }
 
 		public System.Decimal Balance		{ get ; set; }
+
 
 
 		public  Int32 InsertSupplier()
@@ -42,7 +44,7 @@ namespace Balancika.BLL.Base
 			lstItems.Add("@UpdateDate", UpdateDate.ToString(CultureInfo.InvariantCulture));
 			lstItems.Add("@TotalDebit", TotalDebit.ToString(CultureInfo.InvariantCulture));
 			lstItems.Add("@TotalCredit", TotalCredit.ToString(CultureInfo.InvariantCulture));
-			lstItems.Add("@Balance", Balance.ToString(CultureInfo.InvariantCulture));
+			//lstItems.Add("@Balance", Balance.ToString(CultureInfo.InvariantCulture));
 
 			return dal.InsertSupplier(lstItems);
 		}

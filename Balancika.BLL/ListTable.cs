@@ -12,5 +12,10 @@ namespace Balancika.BLL
 		public ListTable() : base()
 		{
 		}
+
+	    public int GetMaxListTableId()
+	    {
+	        return dal.GetMaxListTableId();
+	    }
 	}
 }

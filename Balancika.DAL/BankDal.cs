@@ -24,5 +24,7 @@ namespace Balancika.DAL
                 throw new Exception(ex.Message);
             }
         }
+
+	    
 	}
 }

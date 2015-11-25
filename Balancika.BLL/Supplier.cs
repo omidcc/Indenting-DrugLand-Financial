@@ -12,5 +12,9 @@ namespace Balancika.BLL
 		public Supplier() : base()
 		{
 		}
+        public int GetMaxSupplierID()
+        {
+            return dal.GetMaximumSupplierId();
+        }
 	}
 }

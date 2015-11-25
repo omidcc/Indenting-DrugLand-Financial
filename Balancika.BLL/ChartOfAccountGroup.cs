@@ -12,5 +12,10 @@ namespace Balancika.BLL
 		public ChartOfAccountGroup() : base()
 		{
 		}
+
+	    public int GetMaxCoaGroupId()
+	    {
+	        return dal.GetMaxCoaGroupId();
+	    }
 	}
 }

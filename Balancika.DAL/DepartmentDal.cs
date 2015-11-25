@@ -11,5 +11,18 @@ namespace Balancika.DAL
 		public DepartmentDal() : base()
 		{
 		}
+
+	    public int GetMaxDeptId()
+	    {
+            try
+            {
+                int maxId = GetMaximumID("Department", "DepartmentId", 0, "");
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+	    }
 	}
 }

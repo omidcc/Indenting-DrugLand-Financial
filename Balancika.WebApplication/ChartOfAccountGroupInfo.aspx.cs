@@ -18,6 +18,7 @@ namespace Balancika
         protected void Page_Load(object sender, EventArgs e)
         {
             _company = (Company)Session["Company"];
+            _user = (Users)Session["user"];
 
             if (!isValidSession())
             {
@@ -29,10 +30,23 @@ namespace Balancika
             }
             if (!IsPostBack)
             {
-                _user = (Users)Session["user"];
+
+                if (Request.QueryString["id"] != null)
+                {
+                    string CoaGroupId = Request.QueryString["id"].ToString();
+
+                    ChartOfAccountGroup coa = new ChartOfAccountGroup().GetChartOfAccountGroupByCoaGroupId(int.Parse(CoaGroupId), _company.CompanyId);
+                    if (coa != null || coa.CoaGroupId != 0)
+                    {
+                        
+                        lblId.Text = coa.CoaGroupId.ToString();
+                        txtGroupName.Value = coa.CoaGroupName;
+                        chkIsActive.Checked = true;
+                    }
+                }
             }
-            this.GetAllCompany();
-            this.LoadAccountGroupTable();
+            
+           
         }
         private bool isValidSession()
         {
@@ -59,10 +73,14 @@ namespace Balancika
         protected void btnSave_Click(object sender, EventArgs e)
         {
             ChartOfAccountGroup coaGroup=new ChartOfAccountGroup();
-            coaList = coaGroup.GetAllChartOfAccountGroup(_company.CompanyId);
+            List<ChartOfAccountGroup> coaList = coaGroup.GetAllChartOfAccountGroup(_company.CompanyId);
+            int id = 0;
+            if (coaList.Count > 0)
+            {
+                id = coaList.Count;
+            }
 
-
-            coaGroup.CoaGroupId = coaList.Count;
+            coaGroup.CoaGroupId = id;
             coaGroup.CoaGroupName = txtGroupName.Value;
             coaGroup.ParentId = coaGroup.CoaGroupId;
             coaGroup.IsActive = true;
@@ -70,57 +88,41 @@ namespace Balancika
             coaGroup.UpdateDate=DateTime.Now;
             coaGroup.CompanyId = _user.CompanyId;
 
-            int sucess = coaGroup.InsertChartOfAccountGroup();
-
-            if (sucess > 0)
+            int sucess = 0;
+            if (lblId.Text == "" || lblId.Text == "0")
             {
-                Alert.Show("Accounts group Insert sucessfully");
-                this.Clear();
-                this.LoadAccountGroupTable();
+                coaGroup.CoaGroupId = new ChartOfAccountGroup().GetMaxCoaGroupId() + 1;
+
+                sucess = coaGroup.InsertChartOfAccountGroup();
+
+                if (sucess > 0)
+                {
+                    Alert.Show("Chart Of Account Group saved successfully");
+                    this.Clear();
+                }
+            }
+            else
+            {
+                coaGroup.CoaGroupId = int.Parse(lblId.Text);
+                sucess = coaGroup.UpdateChartOfAccountGroup();
+
+                if (sucess > 0)
+                {
+                    Response.Redirect("ChartOfAccountList.aspx", true);
+                }
             }
 
         }
 
-        private List<Company> allCompany = new List<Company>();
+       
 
-        void GetAllCompany()
-        {
-            Company company = new Company();
-            allCompany = company.GetAllCompany();
-            List<string>nameList=new List<string>();
-            foreach (Company com in allCompany)
-            {
-                nameList.Add(com.CompanyName);
-            }
-           
-        }
+      
         private void Clear()
         {
             txtGroupName.Value = "";
         }
 
-        private void LoadAccountGroupTable()
-        {
-            try
-            {
-                coaTableBody.InnerHtml = "";
-                string htmlContent = "";
-                ChartOfAccountGroup accountGroup = new ChartOfAccountGroup();
-                List<ChartOfAccountGroup> allAccountGroups = accountGroup.GetAllChartOfAccountGroup(_company.CompanyId);
-                foreach (ChartOfAccountGroup coa in allAccountGroups)
-                {
-                    htmlContent += "<tr>";
-                    htmlContent += String.Format(@"<th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th><th>{5}</th>", coa.CoaGroupName, coa.ParentId, coa.IsActive,  coa.UpdateBy, coa.UpdateDate,coa.CompanyId);
-                    htmlContent += "</tr>";
-                }
-
-                coaTableBody.InnerHtml += htmlContent;
-            }
-            catch (Exception exc)
-            {
-                Alert.Show(exc.Message);
-            }
-        }
+        
 
         protected void btnClear_Click(object sender, EventArgs e)
         {

@@ -17,6 +17,7 @@ namespace Balancika
         protected void Page_Load(object sender, EventArgs e)
         {
             _company = (Company)Session["Company"];
+            _user = (Users)Session["user"];
             if (!isValidSession())
             {
                 string str = Request.QueryString.ToString();
@@ -27,10 +28,22 @@ namespace Balancika
             }
             if (!IsPostBack)
             {
-                _user = (Users)Session["user"];
+                
+                if (Request.QueryString["id"] != null)
+                {
+                    string costCenterId = Request.QueryString["id"].ToString();
+
+                    CostCenter costCenter = new CostCenter().GetCostCenterByCostCenterId(int.Parse(costCenterId), _company.CompanyId);
+                    if (costCenter != null || costCenter.CostCenterId != 0)
+                    {
+                        lblId.Text = costCenter.CostCenterId.ToString();
+                        txtCostCenterType.Value = costCenter.CostCenterType;
+                        txtCostCentreName.Value = costCenter.CostCenterName;
+                    }
+                }
             }
             this.GetAllCostCentre();
-            this.LoadCostCentreTable();
+           
         }
         private bool isValidSession()
         {
@@ -54,26 +67,7 @@ namespace Balancika
 
         }
 
-        void LoadCostCentreTable()
-        {
-            try
-            {
-                costTableBody.InnerHtml = "";
-                string htmlContent = "";
-                foreach (CostCenter center in listCenter)
-                {
-                    htmlContent += "<tr>";
-                    htmlContent += String.Format(@"<th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th>",center.CostCenterType,center.CostCenterName,center.IsActive,center.UpdateBy,center.UpdateDate );
-                    htmlContent += "</tr>";
-                }
-
-                costTableBody.InnerHtml += htmlContent;
-            }
-            catch (Exception exc)
-            {
-                Alert.Show(exc.Message);
-            }
-        }
+       
         protected void btnSave_Click(object sender, EventArgs e)
         {
             CostCenter objCenter=new CostCenter();
@@ -86,13 +80,28 @@ namespace Balancika
             objCenter.UpdateBy = _user.UserId;
             objCenter.UpdateDate=DateTime.Now.Date;
 
-            int success = objCenter.InsertCostCenter();
-
-            if (success > 0)
+            int sucess = 0;
+            if (lblId.Text == "" || lblId.Text == "0")
             {
-                Alert.Show("Cost Center Inserted");
-                this.GetAllCostCentre();
-                this.LoadCostCentreTable();
+                objCenter.CostCenterId = new CostCenter().GetMaxCostCenterId() + 1;
+
+                sucess = objCenter.InsertCostCenter();
+
+                if (sucess > 0)
+                {
+                    Alert.Show("Cost Center saved successfully");
+                    
+                }
+            }
+            else
+            {
+                objCenter.CostCenterId = int.Parse(lblId.Text);
+                sucess = objCenter.UpdateCostCenter();
+
+                if (sucess > 0)
+                {
+                    Response.Redirect("CostCenterList.aspx", true);
+                }
             }
         }
 

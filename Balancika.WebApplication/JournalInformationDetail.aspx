@@ -9,12 +9,12 @@
         <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
         <section class="form-horizontal">
             <div class="box">
-                <div id="journalMasterInformationDiv" class="box box-primary" style="width: auto">
+                <div id="journalMasterInformationDiv" class="box box-primary" style="width: auto" runat="server">
                     <div class="box-header with-border" style="width: 100%">
-                        <h1 style="font-size: 20px; font-weight: bold; color: green">Journal Information </h1>
+                        <h1 style="font-size: 20px; font-weight: bold; color: green">Add New Journal Information </h1>
 
                     </div>
-                    <div id="journalMasterInformationBoxBody" class="box-body">
+                    <div id="journalMasterInformationBoxBody" class="box-body" runat="server">
 
                         <div class="col-sm-6">
                             <div class="form-group ">
@@ -75,15 +75,22 @@
 
                             </div>
                         </div>
+                         <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <asp:Button ID="btnSaveNewJournalMasterInformation" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Add New Journal" OnClick="btnSaveNewJournalMasterInformation_Click" />
+                                
+                            </div>
+                        </div>
+
                         
 
 
                     </div>
 
                 </div>
-                <div id="journalDetailsInformationDiv" class="box box-primary" style="width: auto">
+                <div id="journalDetailsInformationDiv" class="box box-primary" style="width: auto" runat="server">
                     <div class="box-header with-border" style="width: 100%">
-                        <h1 style="font-size: 20px; font-weight: bold; color: navy">Journal Details</h1>
+                        <h1 style="font-size: 20px; font-weight: bold; color: navy">Journal Details Information</h1>
                     </div>
                     <div id="journalDetailsInformationBoxBody" class="box-body">
                         <div class="col-sm-6">
@@ -108,7 +115,7 @@
                             <div class="form-group">
                                 <label for="txtJorunalDetailsDescription" class="col-sm-4 control-label">Description</label>
                                 <div class="col-sm-8">
-                                    <textarea type="text" class="form-control" width="60px" name="txtJorunalDetailsDescription" id="txtJorunalDetailsDescription" placeholder="Description" runat="server"></textarea>
+                                    <textarea type="text" class="form-control" width="60px" name="txtJorunalDetailsDescription" id="txtJorunalDetailsDescription" placeholder="Description" runat="server" clientidmode="Static"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +124,7 @@
                             <div class="form-group ">
                                 <label for="txtJournalDetailsDebit" class="col-sm-4 control-label">Debit</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" width="60px" name="txtJournalDetailsDebit" id="txtJournalDetailsDebit" placeholder="Debit" runat="server" />
+                                    <input type="text" class="form-control" width="60px" name="txtJournalDetailsDebit" id="txtJournalDetailsDebit" placeholder="Debit" runat="server" clientidmode="Static"/> 
                                 </div>
 
                             </div>
@@ -126,7 +133,7 @@
                             <div class="form-group ">
                                 <label for="txtJournalDetailsCredit" class="col-sm-4 control-label">Credit</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" width="60px" name="txtJournalDetailsCredit" id="txtJournalDetailsCredit" placeholder="Credit" runat="server" />
+                                    <input type="text" class="form-control" width="60px" name="txtJournalDetailsCredit"  id="txtJournalDetailsCredit" placeholder="Credit" runat="server" clientidmode="Static" />
                                 </div>
 
                             </div>
@@ -134,7 +141,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="btnSaveJournalDetails" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Add Journal Item" OnClick="btnSaveJournalDetails_Click" />
+                                <asp:Button ID="btnSaveJournalSingleDetails" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Add Journal Item" OnClick="btnSaveJournalSingleDetails_Click" />
+                                 <asp:Button Class="clearButton" ID="btnClearJournalDetailsInformation" runat="server" ClientIDMode="Static" CssClass="btn btn-warning" Text="Clear Information" OnClick="btnClearJournalDetailsInformation_Click" />
                             </div>
                         </div>
                         
@@ -156,11 +164,20 @@
                                                         <th>Debit</th>
                                                         <th>Credit</th>
                                                         <th>Description</th>
+                                                          <th>Voucer No</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="journalDetailsTableBody" runat="server">
                                                 </tbody>
                                                 <tfoot>
+                                                <tr role="row">
+                                                 <th></th>
+                                                    <th>Total</th>
+                                                     <th id="totalDebit" runat="server"></th>
+                                                     <th id="totalCredit" runat="server"></th>
+                                                   <th></th>
+                                                    <th></th>
+                                                    </tr>
                                                 </tfoot>
                                             </table>
                                         </div>
@@ -169,17 +186,18 @@
                                 </div>
                             </div>
                         </div>
-                    
-                    </div>
-                </div>
-                
-                <div class="form-group">
+                    <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <asp:Button ID="button1" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Save Journal Master Information" OnClick="btnJournalMasterInformationSave_Click" />
-                            
-                <input class="btn btn-warning" runat="server" onserverclick="btnJournalMasterClear_Click" type="button" value="Clear Information" />
+                                <asp:Button ID="btnSaveJournalDetailsInformation" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Save Journal Master Information" OnClick="btnSaveJournalDetailsInformation_Click" />
+                              
+                                 <input class="btn btn-warning" runat="server" onserverclick="btnJournalMasterClear_Click" type="button" value="Clear All Information" />
                             </div>
                         </div>
+                    </div>
+                      
+                </div>
+                
+              
 
             </div>
 
@@ -196,6 +214,15 @@
                 "info": true,
                 "autoWidth": true,
                 "scrollX": true
+            });
+            console.log("ready");
+            $("#btnClearJournalDetailsInformation").click(function (e) {
+
+                e.preventDefault();
+                $("#txtJorunalDetailsDescription").val("");
+                $("#txtJournalDetailsDebit").val("");
+                $("#txtJournalDetailsCredit").val("");
+               
             });
         });
     </script>

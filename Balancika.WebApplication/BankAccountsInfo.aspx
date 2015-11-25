@@ -64,6 +64,7 @@
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Add /Edit BankInfo Information</h3>
+                    <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
                 </div>
                 <div class="box-body">
                     <div class="col-md-6">
@@ -179,43 +180,7 @@
                 </div>
 
             </div>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Bank Accounts Info</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divCompanyTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="bankAccountsTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>Bank Id</th>
-                                            <th>Branch Name</th>
-                                            <th>Account No</th>
-                                            <th>Account Title</th>
-                                            <th>Account type</th>
-                                            <th>Opening Date</th>
-                                           <th>Is Active</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tableBody" runat="server">
-                                    </tbody>
-                                    <tfoot>
-                                        
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            
         </section>
     </form>
 </asp:Content>

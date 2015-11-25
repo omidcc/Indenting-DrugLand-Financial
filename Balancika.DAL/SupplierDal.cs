@@ -11,5 +11,17 @@ namespace Balancika.DAL
 		public SupplierDal() : base()
 		{
 		}
+        public int GetMaximumSupplierId()
+        {
+            try
+            {
+                int maxId = GetMaximumID("Supplier", "SupplierId", 0, "");
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 	}
 }

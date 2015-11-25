@@ -13,84 +13,54 @@ namespace Balancika
     {
 
         private bool isNewEntry;
-        private Users user;
-        List<Company> companyList = new List<Company>();
+        private Users _user;
+     
         private Company _company=new Company();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             _company = (Company)Session["Company"];
+
             if (!isValidSession())
             {
                 string str = Request.QueryString.ToString();
                 if (str == string.Empty)
-                {
                     Response.Redirect("LogIn.aspx?refPage=index.aspx");
-
-                }
                 else
-                {
                     Response.Redirect("LogIn.aspx?refPage=index.aspx?" + str);
+            }
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["id"] != null)
+                {
+                    string deptId = Request.QueryString["id"].ToString();
+
+                    Department dept = new Department().GetDepartmentByDepartmentId(int.Parse(deptId), _company.CompanyId);
+                    if (dept != null || dept.DepartmentId != 0)
+                    {
+                        lblId.Text = dept.DepartmentId.ToString();
+                        txtDepartmentName.Value = dept.DepartmentName;
+
+                    }
                 }
             }
-
-            if (Session["savedDepartmentMessage"] != null)
-            {
-                string msg = Session["savedDepartmentMessage"].ToString();
-                Session["savedDepartmentMessage"] = null;
-                Alert.Show(msg);
-            }
-            user = (Users)Session["user"];
-
-
-            this.LoadDepartmentDropDownList();
-            this.LoadParentDepartmentIdDropDown();
+            LoadParentDepartmentIdDropDown();
         }
-
-        public bool isValidSession()
+        private bool isValidSession()
         {
             if (Session["user"] == null)
+            {
                 return false;
-            user = (Users) Session["user"];
-            return user.UserId != 0;
-        }
+            }
 
+            _user = (Users)Session["user"];
+
+            return _user.UserId != 0;
+        }
 
 
        
-
-        public void LoadDepartmentDropDownList()
-        {
-            try
-            {
-                DepartmentTableBody.InnerHtml = "";
-                string htmlContent = "";
-                List<Department> departmentList = new List<Department>();
-                Department aDepartment = new Department();
-                departmentList = aDepartment.GetAllDepartment(_company.CompanyId);
-                foreach (Department aDepo in departmentList)
-                {
-                    string CompanyName = "";
-                    htmlContent += "<tr>";
-                    foreach (Company acompany in companyList)
-                    {
-                        if (acompany.CompanyId == aDepo.CompanyId)
-                        {
-                            CompanyName += acompany.CompanyName;
-                            break;
-                        }
-                    }
-
-                    htmlContent += String.Format(@"<th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th></tr>", aDepo.DepartmentName, aDepo.ParentDepartmentId, aDepo.IsActive, aDepo.UpdateBy, aDepo.UpdateDate);
-                }
-                DepartmentTableBody.InnerHtml += htmlContent;
-
-            }
-            catch (Exception exp)
-            {
-                Alert.Show(exp.Message);
-            }
-        }
+        
 
      
 
@@ -108,32 +78,47 @@ namespace Balancika
             try
             {
                 Department aDepartmnent = new Department();
-                List<Department> departmentList = aDepartmnent.GetAllDepartment(_company.CompanyId);
-                Department tempDepartment = departmentList[departmentList.Count - 1];
-                int id = tempDepartment.DepartmentId + 1;
-                aDepartmnent.DepartmentId = id;
-                if (ParentDepartmentDropDownList.SelectedItem.Value != null)
-                    aDepartmnent.ParentDepartmentId = int.Parse(ParentDepartmentDropDownList.SelectedItem.Value);
-                else
-                    aDepartmnent.ParentDepartmentId = id;
+                
+
+
+
 
                 aDepartmnent.DepartmentName = txtDepartmentName.Value;
 
                 aDepartmnent.UpdateDate = DateTime.Now;
-                aDepartmnent.UpdateBy = user.UserId;
+                aDepartmnent.UpdateBy = _user.UserId;
 
                 aDepartmnent.IsActive = true;
                 aDepartmnent.CompanyId = _company.CompanyId;
-                int success = aDepartmnent.InsertDepartment();
-                if (success > 0)
-                {
-                    Session["savedDepartmentMessage"] = "Saved Department Information successfully";
-                    Response.Redirect(Request.RawUrl);
 
+                int sucess = 0;
+                if (lblId.Text == "" || lblId.Text == "0")
+                {
+                    aDepartmnent.DepartmentId = new Department().GetMaxDepartmentId() + 1;
+                    aDepartmnent.ParentDepartmentId = ParentDepartmentDropDownList.SelectedIndex > -1
+                        ? int.Parse(ParentDepartmentDropDownList.SelectedIndex.ToString())
+                        : aDepartmnent.DepartmentId;
+
+                    sucess = aDepartmnent.InsertDepartment();
+
+                    if (sucess > 0)
+                    {
+                        Alert.Show("Department info saved successfully");
+                        this.Clear();
+                    }
                 }
                 else
                 {
-                    Alert.Show("Error Occured while inserting a new user");
+                    aDepartmnent.DepartmentId = int.Parse(lblId.Text);
+                    aDepartmnent.ParentDepartmentId = ParentDepartmentDropDownList.SelectedIndex > -1
+                        ? int.Parse(ParentDepartmentDropDownList.SelectedIndex.ToString())
+                        : aDepartmnent.DepartmentId;
+                    sucess = aDepartmnent.UpdateDepartment();
+
+                    if (sucess > 0)
+                    {
+                        Response.Redirect("DepartmentLists.aspx", true);
+                    }
                 }
                 this.Clear();
             }
@@ -163,12 +148,12 @@ namespace Balancika
         {
             Department dep=new Department();
             List<Department> depList = dep.GetAllDepartment(_company.CompanyId);
-            List<int> idList = new List<int>();
+            List<string> idList = new List<string>();
 
             foreach (Department depoo in depList)
             {
                
-                idList.Add(depoo.ParentDepartmentId);
+                idList.Add(depoo.DepartmentName);
             }
             ParentDepartmentDropDownList.DataSource = idList.Distinct();
             ParentDepartmentDropDownList.DataBind();

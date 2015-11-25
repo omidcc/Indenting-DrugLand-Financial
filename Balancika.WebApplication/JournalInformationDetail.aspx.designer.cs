@@ -31,6 +31,24 @@ namespace Balancika {
         protected global::Telerik.Web.UI.RadScriptManager RadScriptManager1;
         
         /// <summary>
+        /// journalMasterInformationDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl journalMasterInformationDiv;
+        
+        /// <summary>
+        /// journalMasterInformationBoxBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl journalMasterInformationBoxBody;
+        
+        /// <summary>
         /// RadDatePicker1 control.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,24 @@ namespace Balancika {
         protected global::Telerik.Web.UI.RadDropDownList costCenterDropDownList;
         
         /// <summary>
+        /// btnSaveNewJournalMasterInformation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveNewJournalMasterInformation;
+        
+        /// <summary>
+        /// journalDetailsInformationDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl journalDetailsInformationDiv;
+        
+        /// <summary>
         /// RadAjaxPanel4 control.
         /// </summary>
         /// <remarks>
@@ -130,13 +166,22 @@ namespace Balancika {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtJournalDetailsCredit;
         
         /// <summary>
-        /// btnSaveJournalDetails control.
+        /// btnSaveJournalSingleDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveJournalDetails;
+        protected global::System.Web.UI.WebControls.Button btnSaveJournalSingleDetails;
+        
+        /// <summary>
+        /// btnClearJournalDetailsInformation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClearJournalDetailsInformation;
         
         /// <summary>
         /// journalDetailsTableBody control.
@@ -148,12 +193,30 @@ namespace Balancika {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl journalDetailsTableBody;
         
         /// <summary>
-        /// button1 control.
+        /// totalDebit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button1;
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell totalDebit;
+        
+        /// <summary>
+        /// totalCredit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell totalCredit;
+        
+        /// <summary>
+        /// btnSaveJournalDetailsInformation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveJournalDetailsInformation;
     }
 }

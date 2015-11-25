@@ -11,5 +11,18 @@ namespace Balancika.DAL
 		public ChartOfAccountGroupDal() : base()
 		{
 		}
+
+	    public int GetMaxCoaGroupId()
+	    {
+            try
+            {
+                int maxId = GetMaximumID("ChartOfAccountGroup", "CoaGroupId", 0, "");
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+	    }
 	}
 }

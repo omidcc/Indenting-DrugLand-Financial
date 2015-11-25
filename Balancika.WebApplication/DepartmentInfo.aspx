@@ -56,6 +56,7 @@
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Add /Edit Department Information</h3>
+                     <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
                 </div>
                 <div class="box-body">
                     <div class="col-sm-6">
@@ -143,42 +144,6 @@
                     </div>
                 </div>
 
-            </div>
-
-           
-              <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Department Information List</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divDepartmentTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                       <div class="box-body">
-                            <div class="col-sm-12">
-                                <table id="DepartmentTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>Department Name</th>
-                                            <th>Parent Department</th>
-                                            <th>Is Active</th>
-                                            <th>Update By</th>
-                                            <th>Update Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="DepartmentTableBody" runat="server">
-                                    
-                                    </tbody>
-                                    <tfoot>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </section>
     </form>

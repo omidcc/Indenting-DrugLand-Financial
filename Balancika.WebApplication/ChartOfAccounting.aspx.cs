@@ -19,6 +19,7 @@ namespace Balancika
         protected void Page_Load(object sender, EventArgs e)
         {
             _company = (Company)Session["Company"];
+            _user = (Users)Session["user"];
             if (!isValidSession())
             {
                 string str = Request.QueryString.ToString();
@@ -29,11 +30,27 @@ namespace Balancika
             }
             if (!IsPostBack)
             {
-                _user = (Users)Session["user"];
+                if (Request.QueryString["id"] != null)
+                {
+                    string CoaGroupId = Request.QueryString["id"].ToString();
+
+                    ChartOfAccount coa = new ChartOfAccount().GetChartOfAccountByCoaId(int.Parse(CoaGroupId), _company.CompanyId);
+                    if (coa != null || coa.CoaGroupId != 0)
+                    {
+
+                        lblId.Text = coa.CoaId.ToString();
+
+                        this.LoadAllCompany();
+                        this.LoadAccountGroup();
+                        this.LoadType();
+                        txtChartOfAccountCode.Value = coa.CoaCode;
+                        txtChartOfAccountTitle.Value = coa.CoaTitle;
+
+                    }
+                }
             }
             this.LoadAllCompany();
             this.LoadAccountGroup();
-            this.LoadChartTable();
             this.LoadType();
         }
         private bool isValidSession()
@@ -74,29 +91,7 @@ namespace Balancika
             chartOfAccountGroupIdDropDownList.DataBind();
         }
 
-        void LoadChartTable()
-        {
-            try
-            {
-                chartTableBody.InnerHtml = "";
-                string htmlContent = "";
-                ChartOfAccount coa = new ChartOfAccount();
-                List<ChartOfAccount>listGroup=new List<ChartOfAccount>();
-                listGroup = coa.GetAllChartOfAccount(_company.CompanyId);
-                foreach (ChartOfAccount acc in listGroup)
-                {
-                    htmlContent += "<tr>";
-                    htmlContent += String.Format(@"<th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th><th>{5}</th><th>{6}</th>", acc.CoaType,acc.CoaGroupId,acc.CoaCode,acc.CoaTitle,acc.IsActive,acc.UpdateBy,acc.UpdateDate);
-                    htmlContent += "</tr>";
-                }
-
-                chartTableBody.InnerHtml += htmlContent;
-            }
-            catch (Exception exc)
-            {
-                Alert.Show(exc.Message);
-            }
-        }
+       
 
         protected void chartOfAccountTypeDropDownList_ItemSelected(object sender, DropDownListEventArgs e)
         {
@@ -145,7 +140,9 @@ namespace Balancika
             List<ChartOfAccount> myAccounts = objChartOfAccount.GetAllChartOfAccount(_company.CompanyId);
 
             objChartOfAccount.CoaId = myAccounts.Count;
-            objChartOfAccount.CoaType = chartOfAccountTypeDropDownList.SelectedItem.ToString();
+            objChartOfAccount.CoaType = chartOfAccountTypeDropDownList.SelectedItem.Text;
+           
+
             objChartOfAccount.CoaGroupId = chartOfAccountGroupIdDropDownList.SelectedIndex;
             objChartOfAccount.CoaCode = txtChartOfAccountCode.Value;
             objChartOfAccount.CoaTitle = txtChartOfAccountTitle.Value;
@@ -155,28 +152,45 @@ namespace Balancika
             objChartOfAccount.UpdateDate = DateTime.Now;
             objChartOfAccount.CompanyId = _company.CompanyId;
 
-            int success = 0;
-            success = objChartOfAccount.InsertChartOfAccount();
-
-            if (success > 0)
+            int sucess = 0;
+            if (lblId.Text == "" || lblId.Text == "0")
             {
-                Alert.Show("Inserted sucessfully");
-               
-                this.LoadChartTable();
-                this.Clear();
+                objChartOfAccount.CoaId = new ChartOfAccount().GetMaxCoaId() + 1;
+
+                sucess = objChartOfAccount.InsertChartOfAccount();
+
+                if (sucess > 0)
+                {
+                    Alert.Show("Chart Of Account saved successfully");
+                    this.Clear();
+                }
+            }
+            else
+            {
+                objChartOfAccount.CoaId = int.Parse(lblId.Text);
+                sucess = objChartOfAccount.UpdateChartOfAccount();
+
+                if (sucess > 0)
+                {
+                    Response.Redirect("ChartOfAccountingInfoList.aspx", true);
+                }
             }
 
         }
 
         void LoadType()
         {
-            List<string>myList=new List<string>();
-            myList.Add("Company Type");
-            myList.Add("Employee Type");
-            myList.Add("Customer Type");
-            myList.Add("Supplier Type");
+            List<BankAccounts>accList=new List<BankAccounts>();
+            BankAccounts acc=new BankAccounts();
 
-            chartOfAccountTypeDropDownList.DataSource = myList;
+            accList = acc.GetAllBankAccounts(_company.CompanyId);
+            List<string>accTypeList=new List<string>();
+
+            foreach (BankAccounts bankAccounts in accList)
+            {
+                accTypeList.Add(bankAccounts.AccountType);
+            }
+            chartOfAccountTypeDropDownList.DataSource = accTypeList;
             chartOfAccountTypeDropDownList.DataBind();
         }
         private void Clear()

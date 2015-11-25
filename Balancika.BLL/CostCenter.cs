@@ -12,5 +12,10 @@ namespace BALANCIKA.BLL
 		public CostCenter() : base()
 		{
 		}
+
+	    public int GetMaxCostCenterId()
+	    {
+	        return dal.GetMaxCostCenterId();
+	    }
 	}
 }

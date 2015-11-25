@@ -160,7 +160,7 @@ namespace Balancika
           
            
             address.SourceType = "Customer";
-            address.SourceId = _user.UserId;
+            
             address.AddressType = "Main Address";
             address.AddressLine1 = txtAddressLine1.Value;
             address.AddressLine2 = txtAddressLine2.Value;
@@ -174,12 +174,14 @@ namespace Balancika
             address.CompanyId = _company.CompanyId;
             if ((lblId.Text == "" || lblId.Text == "0") && (addlblId.Text == "" || addlblId.Text == "0"))
             {
+                objCustomer.CustomerId = new Customer().GetMaxCustomerID() + 1;
+                address.SourceId = objCustomer.CustomerId;
+                address.AddressId = new Addresses().GetMaxAddressId() + 1;
                 int chk1 = objCustomer.InsertCustomer();
                 int chk2 = address.InsertAddresses();
                 if (chk1 > 0 && chk2 > 0)
                 {
-                    objCustomer.CustomerId = new Customer().GetMaxCustomerID() + 1;
-                    address.AddressId = new Addresses().GetMaxAddressId() + 1;
+                   
                     Session["savedCutomerMessage"] = "Saved Successfully";
                     Response.Redirect(Request.RawUrl);
 

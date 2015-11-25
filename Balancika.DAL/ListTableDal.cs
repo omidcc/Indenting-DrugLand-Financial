@@ -11,5 +11,18 @@ namespace Balancika.DAL
 		public ListTableDal() : base()
 		{
 		}
+
+	    public int GetMaxListTableId()
+	    {
+            try
+            {
+                int maxId = GetMaximumID("ListTable", "Id", 0, "");
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+	    }
 	}
 }

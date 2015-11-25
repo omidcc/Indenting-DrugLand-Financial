@@ -73,8 +73,7 @@
                                             </telerik:GridBoundColumn>
                                             <telerik:GridBoundColumn  DataField="Email" HeaderText="Email" UniqueName="colEmail">
                                             </telerik:GridBoundColumn>
-                                            <telerik:GridBoundColumn  DataField="Web" HeaderText="Web" UniqueName="colWeb">
-                                            </telerik:GridBoundColumn>
+                                            
                                                 
                                            
                                             

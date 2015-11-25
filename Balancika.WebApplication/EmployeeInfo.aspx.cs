@@ -22,6 +22,10 @@ namespace Balancika
         {
             _company = (Company)Session["Company"];
             user = (Users)Session["user"];
+
+            this.LoadCountryDropDownList();
+            this.LoadDepartmentDropDownList();
+            
             
             if (!isValidSession())
             {
@@ -35,17 +39,97 @@ namespace Balancika
                     Response.Redirect("LogIn.aspx?regPage=index.aspx"+str);
                 }
             }
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["id"] != null)
+                {
+                    string id = Request.QueryString["id"].ToString();
+                    Employee tempEmployee= new Employee().GetEmployeeByEmployeeId(int.Parse(id),_company.CompanyId);
+                    if (tempEmployee != null || tempEmployee.EmployeeId != 0)
+                    {
+                        List<string> countryList = Country.CountryList();
+                        List<Addresses> addressList = new Addresses().GetAllAddresses(_company.CompanyId);
+                        Designation designation =
+                            new Designation().GetDesignationByDesignationId(tempEmployee.DesignationId,
+                                _company.CompanyId);
+                        Department department;
+                        if (tempEmployee.DepartmentId != 0)
+                        {
+                            department = new Department().GetDepartmentByDepartmentId(tempEmployee.DepartmentId,
+                                _company.CompanyId);
+                            SetIndex(departmentDropDownList, department.DepartmentId.ToString());
+
+                        }
+                        else
+                        {
+                            department = new Department();
+                            departmentDropDownList.SelectedIndex = -1;
+                        }
+                        lblId.Text = tempEmployee.EmployeeId.ToString();
+                        txtEmployeeCode.Value = tempEmployee.EmployeeCode;
+                        txtEmployeeName.Value = tempEmployee.EmployeeName;
+                        JoinRadDatePicker.SelectedDate = DateTime.Parse(tempEmployee.JoinDate);
+                        RadDatePicker1.SelectedDate = DateTime.Parse(tempEmployee.DOB);
+                        
+                       //SetIndex(designationDropDownList,designation.DesignationId.ToString());
+                        foreach (Addresses tAddress in addressList)
+                        {
+                            if (tAddress.SourceType == "Employee" && tAddress.SourceId == tempEmployee.EmployeeId)
+                            {
+                                addlblId.Text = tAddress.AddressId.ToString();
+                                txtAddressLine1.Value = tAddress.AddressLine1;
+                                txtAddressLine2.Value = tAddress.AddressLine2;
+                                txtCity.Value = tAddress.City;
+                                txtEmail.Value = tAddress.Email;
+                                txtZipCode.Value = tAddress.ZipCode;
+                                txtPhoneNo.Value = tAddress.Phone;
+                                countryDropDownList.SelectedIndex = tAddress.CountryId;
+                                break;
+
+
+                            }
+
+                        }
+                    }
+
+
+                }
+            }
             if (Session["empMessage"] != null)
             {
                 string message = Session["empMessage"].ToString();
                 Session["empMessage"] = null;
                 Alert.Show(message);
             }
-            this.LoadCountryDropDownList();
-            this.LoadDepartmentDropDownList();
-            //this.LoadDesignationDropDownList();
+           
             
 
+        }
+
+        private void LoadDesignationDropDownList()
+        {
+            designationDropDownList.ClearSelection();
+            int departmentId = departmentDropDownList.SelectedIndex>-1?int.Parse(departmentDropDownList.SelectedItem.Value):0;
+            List<Designation> oDesignationList = new Designation().GetDesignationbyDepartmentId(departmentId);
+            designationDropDownList.DataSource = oDesignationList;
+            designationDropDownList.DataTextField = "Designation";
+            designationDropDownList.DataValueField = "DesignationId";
+            designationDropDownList.DataBind();
+
+        }
+
+        public void SetIndex(Telerik.Web.UI.RadDropDownList aDowList, string val)
+        {
+
+            for (int i = 0; i < aDowList.Items.Count; i++)
+            {
+                var li = aDowList.Items[i];
+                if (li.Value == val)
+                {
+                    aDowList.SelectedIndex = i;
+                    break;
+                }
+            }
         }
 
         public bool isValidSession()
@@ -118,27 +202,18 @@ namespace Balancika
                     Response.Redirect(Request.RawUrl);
                 }
                 Employee tempEmployee = new Employee();
-                int id;
-                if (employeeListC.Count > 0)
-                {
-                    tempEmployee = (employeeListC[employeeListC.Count - 1]);
-                      id= tempEmployee.EmployeeId + 1;
-                }
-                else
-                {
-                    id = 0;
-                }
+               
                  
 
                
-                aEmployee.EmployeeId = id;
+               
                 aEmployee.EmployeeCode = txtEmployeeCode.Value;
                 aEmployee.EmployeeName = txtEmployeeName.Value;
                 aEmployee.DOB = RadDatePicker1.SelectedDate.ToString();
                 aEmployee.JoinDate = JoinRadDatePicker.SelectedDate.ToString();
                 
-                aEmployee.DepartmentId = int.Parse(departmentDropDownList.SelectedItem.ToString());
-                aAddresses.SourceId = id;
+                aEmployee.DepartmentId = int.Parse(departmentDropDownList.SelectedIndex>-1?departmentDropDownList.SelectedItem.Value:"0");
+                aEmployee.DesignationId = int.Parse(designationDropDownList.SelectedItem.Value);
                 aEmployee.Address = "Main Address";
                 aAddresses.SourceType = "Employee";
                 aAddresses.AddressLine1 = txtAddressLine1.Value;
@@ -148,23 +223,46 @@ namespace Balancika
                 aAddresses.City = txtCity.Value;
                 aAddresses.ZipCode = txtZipCode.Value;
                 aAddresses.Email = txtEmail.Value;
+                aAddresses.Web = "";
+                aAddresses.Phone = txtPhoneNo.Value;
+                aAddresses.Mobile = "";
                 aAddresses.CompanyId = _company.CompanyId;
                 aEmployee.CompanyId = _company.CompanyId;
                 aEmployee.IsActive = true;
                 aEmployee.UpdateBy = user.UserId;
                 aEmployee.UpdateDate = DateTime.Now;
-                int chkEmployee = aEmployee.InsertEmployee();
-                int chkAddress = aAddresses.InsertAddresses();
-                if (chkAddress > 0 && chkEmployee > 0)
+                if (lblId.Text != "" || lblId.Text != "0")
                 {
-                    Session["empMessage"] = "Saved Successfully";
-                    Response.Redirect(Request.RawUrl);
+                    aEmployee.EmployeeId = new Employee().GetMaxEmployeeId() + 1;
+                    aAddresses.SourceId = aEmployee.EmployeeId;
+                    aAddresses.AddressId = new Addresses().GetMaxAddressId() + 1;
 
+                    int chkEmployee = aEmployee.InsertEmployee();
+                    int chkAddress = aAddresses.InsertAddresses();
+                    if (chkAddress > 0 && chkEmployee > 0)
+                    {
+                        Session["empMessage"] = "Saved Successfully";
+                        Response.Redirect(Request.RawUrl);
+
+                    }
+                    else
+                    {
+                        Alert.Show("Error occured while inserting employee information");
+                    }
                 }
                 else
                 {
-                    Alert.Show("Error occured while inserting employee information");
+                    aEmployee.EmployeeId = int.Parse(lblId.Text);
+                    aAddresses.SourceId = aEmployee.EmployeeId;
+                    aAddresses.AddressId = long.Parse(addlblId.Text);
+                   int chk3= aEmployee.UpdateAddresses();
+                    int chk1=aAddresses.UpdateAddresses();
+                    if(chk3>0&&chk1>0)
+                        Response.Redirect("EmployeeList.aspx",true);
+
+
                 }
+                
 
 
             }
@@ -178,6 +276,11 @@ namespace Balancika
         protected void btnClear_Click(object sender, EventArgs e)
         {
             
+        }
+
+        protected void departmentDropDownList_IndexChanged(object sender, DropDownListEventArgs e)
+        {
+            this.LoadDesignationDropDownList();
         }
     }
 }

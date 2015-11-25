@@ -12,5 +12,10 @@ namespace Balancika.BLL
 		public Department() : base()
 		{
 		}
+
+	    public int GetMaxDepartmentId()
+	    {
+	        return dal.GetMaxDeptId();
+	    }
 	}
 }

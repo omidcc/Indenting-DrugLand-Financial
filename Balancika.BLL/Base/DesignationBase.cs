@@ -25,6 +25,7 @@ namespace Balancika.BLL.Base
 		public System.Int32 UpdateBy		{ get ; set; }
 
 		public System.DateTime UpdateDate		{ get ; set; }
+	    public System.String DepartmentName { get; set; }
 
 
 		public  Int32 InsertDesignation()
@@ -75,6 +76,18 @@ namespace Balancika.BLL.Base
 			}
 			return DesignationList;
 		}
+        public List<Designation> GetDesignationbyDepartmentId(int DepartmentId)
+        {
+            Hashtable lstItems = new Hashtable();
+            lstItems.Add("@DepartmentId", DepartmentId);
+            DataTable dt = dal.GetDesignationAccordinDepartmentId(lstItems);
+            List<Designation> DesignationList = new List<Designation>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                DesignationList.Add(GetObject(dr));
+            }
+            return DesignationList;
+        }
 
 		public Designation GetDesignationByDesignationId(int _DesignationId,int _CompanyId)
 		{

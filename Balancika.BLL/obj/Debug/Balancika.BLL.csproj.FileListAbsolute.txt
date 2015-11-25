@@ -124,3 +124,10 @@ F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.BLL\bin\Debug\Balancika.DAL
 F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.BLL\obj\Debug\Balancika.BLL.csprojResolveAssemblyReference.cache
 F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.BLL\obj\Debug\Balancika.BLL.dll
 F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.BLL\obj\Debug\Balancika.BLL.pdb
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.BLL\bin\Debug\Balancika.BLL.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.BLL\bin\Debug\Balancika.BLL.pdb
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.BLL\bin\Debug\Balancika.DAL.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.BLL\bin\Debug\Balancika.DAL.pdb
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.BLL\obj\Debug\Balancika.BLL.csprojResolveAssemblyReference.cache
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.BLL\obj\Debug\Balancika.BLL.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.BLL\obj\Debug\Balancika.BLL.pdb

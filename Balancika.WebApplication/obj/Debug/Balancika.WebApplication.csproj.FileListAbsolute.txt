@@ -568,3 +568,32 @@ F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.WebApplication\obj\Debug\Ba
 F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.WebApplication\obj\Debug\Balancika.WebApplication.dll.licenses
 F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.WebApplication\obj\Debug\Balancika.WebApplication.dll
 F:\24_11_2015\Indenting-DrugLand-Financial\Balancika.WebApplication\obj\Debug\Balancika.WebApplication.pdb
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\obj\Debug\Balancika.WebApplication.csprojResolveAssemblyReference.cache
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\obj\Debug\Balancika.WebApplication.dll.licenses
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\obj\Debug\Balancika.WebApplication.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Balancika.WebApplication.dll.config
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Balancika.WebApplication.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Balancika.WebApplication.pdb
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\AspNet.ScriptManager.bootstrap.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\AspNet.ScriptManager.jQuery.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Balancika.BLL.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Balancika.DAL.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\EntityFramework.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\EntityFramework.SqlServer.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Microsoft.AspNet.FriendlyUrls.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Microsoft.AspNet.Identity.Core.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\System.Web.Optimization.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\System.Web.Providers.dll
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Balancika.BLL.pdb
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Balancika.DAL.pdb
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\System.Web.Optimization.xml
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Microsoft.AspNet.FriendlyUrls.xml
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\EntityFramework.xml
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\EntityFramework.SqlServer.xml
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Microsoft.AspNet.Identity.Core.xml
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\bin\System.Web.Providers.xml
+E:\My File\Balancika Project\Indenting-DrugLand-Financial\Balancika.WebApplication\obj\Debug\Balancika.WebApplication.pdb

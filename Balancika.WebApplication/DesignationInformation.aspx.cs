@@ -21,42 +21,53 @@ namespace Balancika
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _company = (Company) Session["Company"];
-            if (!isValidSession())
+            try
             {
-                string str = Request.QueryString.ToString();
-                if (str == string.Empty)
-                    Response.Redirect("LogIn.aspx?refPage=index.aspx");
-                else
-                    Response.Redirect("LogIn.aspx?refPage=index.aspx?" + str);
-            }
-            if (!IsPostBack)
-            {
-                user = (Users)Session["user"];
-
-                this.Clear();
-                
-              
-               
-            }
-            this.LoadDesignationTable();
-            this.LoadDepartmentDropDownList();
-            if (!IsPostBack)
-            {
-                if (Session["colDesignationId"] != null)
+                _company = (Company) Session["Company"];
+                if (!isValidSession())
                 {
-                    string designationID = Session["colDesignationId"].ToString();
-                    Designation objDesignation=new Designation().GetDesignationByDesignationId(int.Parse(designationID),_company.CompanyId);
-                    if (objDesignation != null || objDesignation.DepartmentId != 0)
-                    {
-                        Department aDepartment=new Department().GetDepartmentByDepartmentId(objDesignation.DesignationId,_company.CompanyId);
-                    }
-                    txtDesignationName.Value = objDesignation.Designation;
-                    SetIndex(departmentIdRadDropDownList,objDesignation.DepartmentId.ToString());
-
-                    
-
+                    string str = Request.QueryString.ToString();
+                    if (str == string.Empty)
+                        Response.Redirect("LogIn.aspx?refPage=index.aspx");
+                    else
+                        Response.Redirect("LogIn.aspx?refPage=index.aspx?" + str);
                 }
+
+                this.LoadDesignationTable();
+                this.LoadDepartmentDropDownList();
+                if (!IsPostBack)
+                {
+                    if (Request.QueryString["id"] != null)
+                    {
+                        string designationID = Request.QueryString["id"].ToString();
+                        Designation objDesignation =
+                            new Designation().GetDesignationByDesignationId(int.Parse(designationID), _company.CompanyId);
+                        lblId.Text = objDesignation.DesignationId.ToString();
+                        if (objDesignation != null || objDesignation.DepartmentId != 0)
+                        {
+                            Department aDepartment =
+                                new Department().GetDepartmentByDepartmentId(objDesignation.DesignationId,
+                                    _company.CompanyId);
+
+                            txtDesignationName.Value = objDesignation.Designation;
+                            SetIndex(departmentIdRadDropDownList, objDesignation.DepartmentId.ToString());
+                            chkIsActive.Checked = objDesignation.IsActive;
+                        }
+
+
+
+                    }
+                }
+                if (Session["designationInfoMsg"] != null)
+                {
+                    string str = Session["designationInfoMsg"].ToString();
+                    Alert.Show(str);
+                    Session["designationInfoMsg"] = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex.Message);
             }
 
         }
@@ -79,8 +90,8 @@ namespace Balancika
         {
             Designation newDesignation = new Designation();
             objDesignationList = newDesignation.GetAllDesignation(_company.CompanyId);
-            RadGrid1.DataSource = objDesignationList;
-            RadGrid1.Rebind();
+            //RadGrid1.DataSource = objDesignationList;
+            //RadGrid1.Rebind();
 
         }
 
@@ -139,14 +150,36 @@ namespace Balancika
                 Designation aDesignation = new Designation();
                 aDesignation.Designation = txtDesignationName.Value;
                 aDesignation.CompanyId = _company.CompanyId;
-                aDesignation.DepartmentId = departmentIdRadDropDownList.SelectedIndex >= -1 ? int.Parse(departmentIdRadDropDownList.SelectedItem.Value) : 0;
+                aDesignation.DepartmentId = departmentIdRadDropDownList.SelectedIndex > -1 ? int.Parse(departmentIdRadDropDownList.SelectedItem.Value) : int.Parse("0");
                 aDesignation.UpdateDate = DateTime.Now;
                 aDesignation.UpdateBy = user.UserId;
+                
                // aDesignation.UpdateBy = user.User;
                 aDesignation.IsActive = chkIsActive.Checked;
-               int success= aDesignation.InsertDesignation();
-                Alert.Show(success>0?"Designation Saved Successfully":"Something Error Happened");
-                this.LoadDesignationTable();
+                if (lblId.Text == "" || lblId.Text == "0")
+                {
+                    aDesignation.DesignationId = new Designation().GetMaxdesignationID() + 1;
+                    int success = aDesignation.InsertDesignation();
+                    string msg=(success > 0 ? "Designation Saved Successfully" : "Something Error Happened");
+                    Session["designationInfoMsg"] = msg;
+                    this.Clear();
+                    Response.Redirect(Request.RawUrl);
+                    
+                }
+                else
+                {
+                    aDesignation.DesignationId = int.Parse(lblId.Text);
+                    int check = aDesignation.UpdateDesignation();
+                    if (check > 0)
+                    {
+                        Response.Redirect("DesignationList.aspx", true);
+
+                    }
+                    else
+                    {
+                        Alert.Show("Updated is not successfully done");
+                    }
+                }
 
 
 
@@ -160,7 +193,9 @@ namespace Balancika
 
         public void Clear()
         {
-
+            txtDesignationName.Value = "";
+            departmentIdRadDropDownList.SelectedIndex = -1;
+            chkIsActive.Checked = false;
         }
 
        
@@ -169,6 +204,7 @@ namespace Balancika
         {
             List<Department> departmentList=new List<Department>();
             Department aDepartment=new Department();
+            departmentList.Add(aDepartment);
             
             departmentList= aDepartment.GetAllDepartment(0);
             departmentIdRadDropDownList.DataSource = departmentList;
@@ -177,35 +213,6 @@ namespace Balancika
             departmentIdRadDropDownList.DataBind();
         }
 
-        protected void RadGrid1_OnItemCommand(object sender, GridCommandEventArgs e)
-        {
-            try
-            {
-                GridDataItem item = (GridDataItem)e.Item;
-                string id = item["colId"].Text;
-                switch (e.CommandName)
-                {
-                    case "btnSelect":
-                    {
-                        Session["colDesignationId"] = id;
-                        Response.Redirect(Request.RawUrl);
-                        break;
-                    }
-                    case "btnDelete":
-                        int del = new Department().DeleteDepartmentByDepartmentId(int.Parse(id));
-                        if(del==0)
-                            Alert.Show("Data is not deleted");
-                        else
-                        {
-                                this.LoadDesignationTable();
-                        }
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Alert.Show(ex.Message);
-            }
-        }
+      
     }
 }

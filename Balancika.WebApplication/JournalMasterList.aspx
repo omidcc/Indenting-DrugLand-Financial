@@ -35,15 +35,16 @@
                         <table id="journalMasterTable" class="table table-bordered table-hover dataTable">
                             <thead>
                                 <tr role="row">
-                                    <th>Company Name</th>
-                                    <th>Address</th>
-                                    <th>Phone Number</th>
-                                    <th>Email</th>
-                                    <th>Web Address</th>
-                                    <th>Logo Path</th>
+                                    <th>Journal Date</th>
+                                    <th>Journal Type</th>
+                                    <th>Journal Description</th>
                                     <th>Update By</th>
                                     <th>Update Date</th>
-                                    <th>Is Active</th>
+                                    <th>Approved By</th>
+                                    <th>Approved Date</th>
+                                  
+                                    
+                                   
                                 </tr>
                             </thead>
                             <tbody id="journalMasterTableBody" runat="server">

@@ -50,6 +50,7 @@
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Lists</h3>
+                     <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
                 </div>
                 <div class="box-body">
                     <div class="col-sm-6">
@@ -98,39 +99,8 @@
                 </div>
 
             </div>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Lists</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divListTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="box-body">
-                            <div class="col-sm-12">
-                                <table id="listTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>List Type</th>
-                                            <th>List Id</th>
-                                            <th>List Value</th>
-                                            <th>Is Active</th>
-                                            <th>Update Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="ListTableBody" runat="server">
-                                    </tbody>
-                                    <tfoot>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            
+            
         </section>
     </form>
 </asp:Content>

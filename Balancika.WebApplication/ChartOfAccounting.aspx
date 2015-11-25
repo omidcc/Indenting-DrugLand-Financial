@@ -61,6 +61,7 @@
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Add /Edit Chart of Accounts</h3>
+                     <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
                 </div>
                 <div class="box-body">
                     <div class="col-md-6">
@@ -100,7 +101,7 @@
                                         runat="server" padding-left="20px"
                                         Width="100%"
                                         AutoPostBack="true"
-                                        DefaultMessage="Select Chart Of Account Group Id"
+                                        DefaultMessage="Select Chart Of Account Group"
                                         OnItemSelected="chartOfAccountGroupIdDropDownList_ItemSelected"
                                         OnSelectedIndexChanged="chartOfAccountGroupIdDropDownList_SelectedIndexChanged"
                                         Skin="Bootstrap">
@@ -163,43 +164,8 @@
                 </div>
 
             </div>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Chart Of Accounts</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divCompanyTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="coaTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>Account Type</th>
-                                            <th>Account Group ID</th>
-                                            <th>Account Code</th>
-                                            <th>Account Title</th>
-                                            <th>Update By</th>
-                                            <th>Update Date</th>
-                                            <th>Is Active</th>
-                                           
-                                        </tr>
-                                    </thead>
-                                    <div id="chartTableBody" runat="server">
-                                    </div>
-                                    <tfoot>
-                                        
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            
+             
         </section>
     </form>
 </asp:Content>

@@ -12,5 +12,10 @@ namespace Balancika.BLL
 		public BankAccounts() : base()
 		{
 		}
+
+	    public int GetMaxAccountId()
+	    {
+	        return dal.GetMaxAccountId();
+	    }
 	}
 }

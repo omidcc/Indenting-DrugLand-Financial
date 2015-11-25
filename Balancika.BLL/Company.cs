@@ -12,5 +12,9 @@ namespace Balancika.BLL
 		public Company() : base()
 		{
 		}
+        public int GetMaxCompanyId()
+        {
+            return dal.GetMaximumCompanyID();
+        }
 	}
 }

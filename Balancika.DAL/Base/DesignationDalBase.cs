@@ -37,6 +37,20 @@ namespace Balancika.DAL.Base
 				throw new Exception(ex.Message);
 			}
 		}
+        public DataTable GetDesignationAccordinDepartmentId(Hashtable lstData)
+        {
+            string whereCondition = " where Designation.DepartmentId = 0 Or Designation.DepartmentId = @DepartmentId And Designation.IsActive = 1";
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = GetDataTable("Designation", "*", whereCondition, lstData);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
 		public int InsertDesignation(Hashtable lstData)
 		{

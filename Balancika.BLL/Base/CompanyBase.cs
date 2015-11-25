@@ -8,7 +8,7 @@ using Balancika.DAL;
 
 namespace Balancika.BLL.Base
 {
-	public class CompanyBase
+	public class CompanyBase : Addresses
 	{
 		protected static Balancika.DAL.CompanyDal dal = new Balancika.DAL.CompanyDal();
 
@@ -31,6 +31,8 @@ namespace Balancika.BLL.Base
 		public System.DateTime UpdateDate		{ get ; set; }
 
 		public System.Boolean IsActive		{ get ; set; }
+	    public System.String CountryName { get; set; }
+
 
 
 		public  Int32 InsertCompany()

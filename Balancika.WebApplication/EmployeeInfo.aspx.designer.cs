@@ -31,6 +31,42 @@ namespace Balancika {
         protected global::Telerik.Web.UI.RadScriptManager RadScriptManager1;
         
         /// <summary>
+        /// lblId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblId;
+        
+        /// <summary>
+        /// addlblId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label addlblId;
+        
+        /// <summary>
+        /// depID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label depID;
+        
+        /// <summary>
+        /// desID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label desID;
+        
+        /// <summary>
         /// txtEmployeeCode control.
         /// </summary>
         /// <remarks>
@@ -49,22 +85,22 @@ namespace Balancika {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtEmployeeName;
         
         /// <summary>
-        /// txtDesignationName control.
+        /// RadAjaxPanel3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDesignationName;
+        protected global::Telerik.Web.UI.RadAjaxPanel RadAjaxPanel3;
         
         /// <summary>
-        /// RadAjaxPanel2 control.
+        /// designationDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxPanel RadAjaxPanel2;
+        protected global::Telerik.Web.UI.RadDropDownList designationDropDownList;
         
         /// <summary>
         /// departmentDropDownList control.

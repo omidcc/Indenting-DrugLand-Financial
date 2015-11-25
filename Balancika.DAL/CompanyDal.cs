@@ -11,5 +11,17 @@ namespace Balancika.DAL
 		public CompanyDal() : base()
 		{
 		}
+        public int GetMaximumCompanyID()
+        {
+            try
+            {
+                int maxId = GetMaximumID("Company", "CompanyId", 0, "");
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 	}
 }

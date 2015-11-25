@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BankAccoutsList.aspx" />
     <Content Include="BankInfo.aspx" />
     <Content Include="BankLists.aspx" />
     <Content Include="BankAccountsInfo.aspx" />
@@ -109,16 +110,22 @@
     <Content Include="bootstrap\js\npm.js" />
     <Content Include="ChartOfAccountGroupInfo.aspx" />
     <Content Include="ChartOfAccounting.aspx" />
+    <Content Include="ChartOfAccountingInfoList.aspx" />
+    <Content Include="ChartOfAccountList.aspx" />
     <Content Include="CompanyInfo.aspx" />
+    <Content Include="CompanyList.aspx" />
     <Content Include="ContactAndAddress.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CostCenterInfo.aspx" />
+    <Content Include="CostCenterList.aspx" />
     <Content Include="CustomerInfo.aspx" />
     <Content Include="CustomerList.aspx" />
     <Content Include="DepartmentInfo.aspx" />
+    <Content Include="DepartmentLists.aspx" />
     <Content Include="DesignationInformation.aspx" />
+    <Content Include="DesignationList.aspx" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
     <Content Include="dist\css\skins\skin-black-light.css" />
@@ -299,6 +306,7 @@
     <Content Include="jtable\themes\metro\red\jtable.min.css" />
     <Content Include="jtable\themes\metro\red\loading.gif" />
     <Content Include="ListTableInfo.aspx" />
+    <Content Include="ListTableLists.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1195,6 +1203,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="SupplierInfo.aspx" />
+    <Content Include="SupplierList.aspx" />
     <Content Include="Temp.aspx" />
     <Content Include="UserInfo.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -1214,6 +1223,13 @@
     <Compile Include="Alert.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BankAccoutsList.aspx.cs">
+      <DependentUpon>BankAccoutsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BankAccoutsList.aspx.designer.cs">
+      <DependentUpon>BankAccoutsList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BankInfo.aspx.cs">
       <DependentUpon>BankInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1249,12 +1265,33 @@
     <Compile Include="ChartOfAccounting.aspx.designer.cs">
       <DependentUpon>ChartOfAccounting.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ChartOfAccountingInfoList.aspx.cs">
+      <DependentUpon>ChartOfAccountingInfoList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChartOfAccountingInfoList.aspx.designer.cs">
+      <DependentUpon>ChartOfAccountingInfoList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChartOfAccountList.aspx.cs">
+      <DependentUpon>ChartOfAccountList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChartOfAccountList.aspx.designer.cs">
+      <DependentUpon>ChartOfAccountList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CompanyInfo.aspx.cs">
       <DependentUpon>CompanyInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CompanyInfo.aspx.designer.cs">
       <DependentUpon>CompanyInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyList.aspx.cs">
+      <DependentUpon>CompanyList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompanyList.aspx.designer.cs">
+      <DependentUpon>CompanyList.aspx</DependentUpon>
     </Compile>
     <Compile Include="ContactAndAddress.aspx.cs">
       <DependentUpon>ContactAndAddress.aspx</DependentUpon>
@@ -1269,6 +1306,13 @@
     </Compile>
     <Compile Include="CostCenterInfo.aspx.designer.cs">
       <DependentUpon>CostCenterInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CostCenterList.aspx.cs">
+      <DependentUpon>CostCenterList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CostCenterList.aspx.designer.cs">
+      <DependentUpon>CostCenterList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Country.cs" />
     <Compile Include="CustomerInfo.aspx.cs">
@@ -1287,9 +1331,17 @@
     </Compile>
     <Compile Include="DepartmentInfo.aspx.cs">
       <DependentUpon>DepartmentInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DepartmentInfo.aspx.designer.cs">
       <DependentUpon>DepartmentInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentLists.aspx.cs">
+      <DependentUpon>DepartmentLists.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DepartmentLists.aspx.designer.cs">
+      <DependentUpon>DepartmentLists.aspx</DependentUpon>
     </Compile>
     <Compile Include="DesignationInformation.aspx.cs">
       <DependentUpon>DesignationInformation.aspx</DependentUpon>
@@ -1297,6 +1349,13 @@
     </Compile>
     <Compile Include="DesignationInformation.aspx.designer.cs">
       <DependentUpon>DesignationInformation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesignationList.aspx.cs">
+      <DependentUpon>DesignationList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesignationList.aspx.designer.cs">
+      <DependentUpon>DesignationList.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmployeeInfo.aspx.cs">
       <DependentUpon>EmployeeInfo.aspx</DependentUpon>
@@ -1343,6 +1402,13 @@
     <Compile Include="ListTableInfo.aspx.designer.cs">
       <DependentUpon>ListTableInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ListTableLists.aspx.cs">
+      <DependentUpon>ListTableLists.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListTableLists.aspx.designer.cs">
+      <DependentUpon>ListTableLists.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LogIn.aspx.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1369,6 +1435,13 @@
     </Compile>
     <Compile Include="SupplierInfo.aspx.designer.cs">
       <DependentUpon>SupplierInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierList.aspx.cs">
+      <DependentUpon>SupplierList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupplierList.aspx.designer.cs">
+      <DependentUpon>SupplierList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Temp.aspx.cs">
       <DependentUpon>Temp.aspx</DependentUpon>

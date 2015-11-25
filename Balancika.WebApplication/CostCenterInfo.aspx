@@ -49,6 +49,7 @@
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Add Cost Centre Information</h3>
+                    <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
                 </div>
                 <div class="box-body">
                     <div class="col-sm-6">
@@ -96,39 +97,7 @@
                 </div>
 
             </div>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Cost Centre Details</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divListTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="box-body">
-                            <div class="col-sm-12">
-                                <table id="costTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>Cost Centre Type</th>
-                                            <th>Cost Centre Name</th>
-                                            <th>Is Active</th>
-                                            <th>Update By</th>
-                                            <th>Update Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="costTableBody" runat="server">
-                                    </tbody>
-                                    <tfoot>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            
         </section>
     </form>
 </asp:Content>

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="CompanyInfo.aspx.cs" Inherits="Balancika.CompanyInfo" %>
+
 <%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI, Version=2015.1.225.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainHeader">
@@ -7,15 +8,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script>
         $(document).ready(function () {
-            $('#CompanyTable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "scrollX": true
-            });
+
             $("#form1").validate({
                 rules: {
                     '<%=txtCompanyName.UniqueID%>': {
@@ -23,11 +16,8 @@
                     },
                     '<%=txtEmail.UniqueID%>': {
                         email: true
-                    },
-                    '<%=txtAddress.UniqueID%>': {
-                        required: true
                     }
-                    
+
                 },
                 messages: {
                     '<%=txtCompanyName.UniqueID%>': {
@@ -35,9 +25,6 @@
                     },
                     '<%=txtEmail.UniqueID%>': {
                         email: "Please enter valid email address"
-                    },
-                    '<%=txtAddress.UniqueID%>': {
-                        required: "Please enter company address"
                     }
                 }
 
@@ -53,6 +40,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Add /Edit Company Information</h3>
                 </div>
+                <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
+                     <asp:Label ID="addlblId" runat="server" Visible="False" Text=""></asp:Label>
                 <div class="box-body">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -62,17 +51,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="txtAddress" class="col-sm-4 control-label">Address</label>
-                            <div class="col-xs-8">
-                                <input type="text" class="form-control" width="60px" name="txtAddress" id="txtAddress" placeholder="Address" runat="server" />
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                     <div class="col-md-6">
+                   
+                    
+                    <div class="col-md-6">
                         <div class="form-group ">
                             <label for="txtPhoneNo" class="col-sm-4 control-label">Phone Number</label>
                             <div class="col-xs-8">
@@ -82,7 +63,7 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="clearfix"></div>
 
                     <div class="col-sm-6">
@@ -112,7 +93,6 @@
                                 --%>
                                 <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
                                     <telerik:RadDropDownList ID="countryDropDownList"
-                                        
                                         runat="server" padding-left="20px"
                                         Width="100%"
                                         AutoPostBack="true"
@@ -201,44 +181,7 @@
                 </div>
 
             </div>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Comapny List</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divCompanyTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="box-body">
-                            <div class="col-sm-12">
-                                <table id="CompanyTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>Company Name</th>
-                                            <th>Address</th>
-                                            <th>Phone Number</th>
-                                            <th>Email</th>
-                                            <th>Web Address</th>
-                                            <th>Logo Path</th>
-                                            <th>Update By</th>
-                                            <th>Update Date</th>
-                                            <th>Is Active</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="companyTableBody" runat="server">
-                                    </tbody>
-                                    <tfoot>
-                                       
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            
         </section>
     </form>
 </asp:Content>

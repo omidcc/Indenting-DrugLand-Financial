@@ -16,10 +16,7 @@
         </telerik:RadStyleSheetManager>
         <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         </telerik:RadAjaxManager>
-    <script>
-        
-        
-    </script>
+    
 
         <telerik:RadScriptManager ID="RadScriptManager1" runat="server"></telerik:RadScriptManager>
         <section class="form-horizontal">
@@ -53,16 +50,20 @@
                                         <Columns>
                                             <telerik:GridBoundColumn  DataField="BankId"  HeaderText="ID" UniqueName="colId" Display="False">
                                             </telerik:GridBoundColumn>
+                                            <telerik:GridBoundColumn  DataField="BankCode" HeaderText="Bank Code" UniqueName="colName">
+                                            </telerik:GridBoundColumn>
                                             <telerik:GridBoundColumn  DataField="BankName" HeaderText="Bank Name" UniqueName="colName">
                                             </telerik:GridBoundColumn>
-                                            <telerik:GridBoundColumn  DataField="ContactPerson" HeaderText="Contact Person" UniqueName="colContactPerson">
+                                            <telerik:GridBoundColumn  DataField="ContactPerson" HeaderText="Contact Person" UniqueName="colName">
                                             </telerik:GridBoundColumn>
-                                            <telerik:GridBoundColumn  DataField="ContactDesignation" HeaderText="Contact Designation" UniqueName="colContactDesgination">
-                                                
+                                            <telerik:GridBoundColumn  DataField="ContactDesignation" HeaderText="Contact Designation" UniqueName="colName">
                                             </telerik:GridBoundColumn>
-                                            <telerik:GridBoundColumn  DataField="ContactNo" HeaderText="Contact No" UniqueName="colContactNo">
+                                            <telerik:GridBoundColumn  DataField="ContactNo" HeaderText="Contact No" UniqueName="colName">
                                             </telerik:GridBoundColumn>
-                                            <telerik:GridBoundColumn  DataField="ContactEmail" HeaderText="Contact Email" UniqueName="colContactEmail">
+                                            
+                                            <telerik:GridBoundColumn  DataField="ContactEmail" HeaderText="Contact Email" UniqueName="colName">
+                                            </telerik:GridBoundColumn>
+                                            <telerik:GridBoundColumn  DataField="UpdatedDate" HeaderText="Update Date" UniqueName="colName">
                                             </telerik:GridBoundColumn>
                                             <telerik:GridButtonColumn
                                                 CommandName="btnSelect"

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -17,10 +18,18 @@ namespace Balancika
         private Users _user;
         private static int userId;
         List<Company> companyList = new List<Company>();
+        private Company _company=new Company();
 
        
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            _company = (Company) Session["Company"];
+            this.LoadAllCompany();
+            
+            this.LoadCountryDropdown();
+           
+           
             if (!isValidSession())
             {
                 string str = Request.QueryString.ToString();
@@ -31,15 +40,50 @@ namespace Balancika
             }
             if (!IsPostBack)
             {
-                userId = 1;
+                if (Request.QueryString["id"] != null)
+                {
+                    string companyId = Request.QueryString["id"].ToString();
+                    Company tempCompany= new Company().GetCompanyByCompanyId(int.Parse(companyId));
+                    if (tempCompany != null || tempCompany.CompanyId != 0)
+                    {
+                        Addresses tempAddress = new Addresses();
+                        List<Addresses> listAdddress = tempAddress.GetAllAddresses(_company.CompanyId);
+                        foreach (Addresses addressese in listAdddress.Where(addressese => addressese.SourceId == tempCompany.CompanyId && addressese.SourceType == "Company"))
+                        {
+                            tempAddress = addressese;
+                            break;
+                        }
+                        lblId.Text = tempCompany.CompanyId.ToString();
+                        addlblId.Text = tempAddress.AddressId.ToString();
+                        txtCompanyName.Value=tempCompany.CompanyName;
 
-                this.LoadAllCompany();
-                this.Clear();
-                this.LoadCompanyTable();
+                         
+                        txtPhoneNo.Value=tempAddress.Phone;
+                      txtEmail.Value=tempAddress.Email;
+                        txtWeb.Value=tempAddress.Web;
+                       txtLogoPath.Value=tempCompany.LogoPath;
+
+
+                        // newCompany.UpdateBy = user.UserId;
+                        
+                      chkIsActive.Checked=tempCompany.IsActive;
+
+                        txtAddressLine1.Value=tempAddress.AddressLine1;
+                        txtAddressLine2.Value=tempAddress.AddressLine2;
+                        countryDropDownList.SelectedIndex=tempAddress.CountryId;
+                        txtCity.Value=tempAddress.City;
+                        txtZipCode.Value=tempAddress.ZipCode;
+                        
+                       
+                       
+
+                    }
+                }
+
+               
 
             }
-            this.LoadCountryDropdown();
-            this.LoadCompanyTable();
+            
         }
 
         private bool isValidSession()
@@ -71,52 +115,16 @@ namespace Balancika
             }
         }
 
-        public void LoadCompanyTable()
-        {
-            try
-            {
-                companyTableBody.InnerHtml = "";
-                string htmlContent = "";
-                foreach (Company comp in companyList)
-                {
-                    htmlContent += "<tr>";
-                    htmlContent += String.Format(@"<th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th><th>{5}</th><th>{6}</th><th>{7}</th><th>{8}</th>", comp.CompanyName, comp.Address, comp.Phone, comp.Email, comp.Web, comp.LogoPath, comp.UpdateBy, comp.UpdateDate, comp.IsActive);
-                    htmlContent += "</tr>";
-                }
-
-                companyTableBody.InnerHtml += htmlContent;
-            }
-            catch (Exception exc)
-            {
-                Alert.Show(exc.Message);
-            }
-        }
+      
 
 
 
-        public void LoadTable()
-        {
-            try
-            {
-                string tableData = "";
-
-
-                foreach (Company company in companyList)
-                {
-                    tableData += "<tbody><tr><td>'" + company.CompanyName + "'</td><td>'" + company.Address + "'</td><td>'" + company.Phone + "'<td><td>'" + company.Email + "'<td><td>'" + company.Web + "'<td><td>'" + company.LogoPath + "'<td><td>'" + company.UpdateBy + "'<td><td>'" + company.UpdateDate + "'<td><td>'" + company.IsActive + "'<td></tr></tbody>";
-                }
-                // tableBody.InnerHtml = tableData;
-            }
-            catch (Exception exception)
-            {
-                Alert.Show(exception.Message);
-            }
-        }
+  
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
             if (txtCompanyName.Value == string.Empty)
             {
                 Alert.Show("Please enter the company name.");
@@ -128,10 +136,10 @@ namespace Balancika
 
             newCompany.CompanyName = txtCompanyName.Value;
 
-            newCompany.Address = txtAddress.Value;
-            newCompany.Phone = txtPhoneNo.Value;
-            newCompany.Email = txtEmail.Value;
-            newCompany.Web = txtWeb.Value;
+            newCompany.Address = "";
+            newCompany.Phone = "";
+            newCompany.Email = "";
+            newCompany.Web = "";
             newCompany.LogoPath = txtLogoPath.Value;
 
 
@@ -142,7 +150,7 @@ namespace Balancika
 
             Addresses address = new Addresses();
             address.SourceType = "Company";
-            address.SourceId = _user.CompanyId;
+            
             address.AddressType = "Main Address";
             address.AddressLine1 = txtAddressLine1.Value;
             address.AddressLine2 = txtAddressLine2.Value;
@@ -155,26 +163,46 @@ namespace Balancika
             address.Web = txtWeb.Value;
             address.CompanyId = _user.CompanyId;
 
-           
 
-            int success = newCompany.InsertCompany();
-            address.InsertAddresses();
-            if (success > 0)
-            {
-                Alert.Show("Saved Company Information Successfully!");
-                this.LoadAllCompany();
-                this.Clear();
-                this.LoadCompanyTable();
+                if (lblId.Text != "" || lblId.Text != "0")
+                {
+                    newCompany.CompanyId = new Company().GetMaxCompanyId() + 1;
+                    address.SourceId = newCompany.CompanyId;
+                    address.AddressId = new Addresses().GetMaxAddressId() + 1;
+                    int success = newCompany.InsertCompany();
+                    address.InsertAddresses();
+                    if (success > 0)
+                    {
+                        Alert.Show("Saved Company Information Successfully!");
+                        this.LoadAllCompany();
+                        this.Clear();
+
+                    }
+                    else
+                    {
+                        Alert.Show("Error occured !");
+                    }
+                }
+                else
+                {
+                    newCompany.CompanyId = int.Parse(lblId.Text);
+                    address.SourceId = newCompany.CompanyId;
+                    address.AddressId = long.Parse(addlblId.Text);
+                    int chk1 = newCompany.UpdateAddresses();
+                    int chk2 = address.UpdateAddresses();
+                    
+
+                    if (chk1 > 0||chk2>0)
+                    {
+                        Response.Redirect("CompanyList.aspx", true);
+                    }
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                Alert.Show("Error occured !");
+                Alert.Show(ex.Message);
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Alert.Show(ex.Message);
-            //}
         }
         protected void btnClear_Click(object sender, EventArgs e)
         {
@@ -199,13 +227,14 @@ namespace Balancika
         public void Clear()
         {
             txtCompanyName.Value = "";
-            txtAddress.Value = "";
+            
             txtEmail.Value = "";
             txtWeb.Value = "";
             txtPhoneNo.Value = "";
             txtLogoPath.Value = "";
             chkIsActive.Checked = false;
             isNewEntry = true;
+            countryDropDownList.SelectedIndex = -1;
         }
 
         protected void countryDropDownList_ItemSelected(object sender, DropDownListEventArgs e)

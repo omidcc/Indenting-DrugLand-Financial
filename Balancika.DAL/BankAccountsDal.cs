@@ -11,5 +11,18 @@ namespace Balancika.DAL
 		public BankAccountsDal() : base()
 		{
 		}
+
+	    public int GetMaxAccountId()
+	    {
+            try
+            {
+                int maxId = GetMaximumID("BankAccounts", "BankAccountId", 0, "");
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+	    }
 	}
 }

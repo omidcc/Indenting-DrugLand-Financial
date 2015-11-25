@@ -12,36 +12,70 @@ namespace Balancika
 {
     public partial class BankAccountsInfo : System.Web.UI.Page
     {
-        private bool isNewEntry;
         private Users _user;
-        private static int userId;
-        private Company _company = new Company();
+        private Company _company;
         protected void Page_Load(object sender, EventArgs e)
         {
             _company = (Company)Session["Company"];
-            if (Session["saveBankAccountInfo"] != null)
-            {
-                string msg = Session["saveBankAccountInfo"].ToString();
-                Session["saveBankAccountInfo"] = null;
-                Alert.Show(msg);
-            }
+            _user = (Users)Session["User"];
+
             if (!isValidSession())
             {
                 string str = Request.QueryString.ToString();
                 if (str == string.Empty)
-                    Response.Redirect("LogIn.aspx?refPage=default.aspx");
+                    Response.Redirect("LogIn.aspx?refPage=index.aspx");
                 else
-                    Response.Redirect("LogIn.aspx?refPage=default.aspx?" + str);
+                    Response.Redirect("LogIn.aspx?refPage=index.aspx?" + str);
             }
             if (!IsPostBack)
             {
-                userId = 1;
-            }
+                if (Request.QueryString["id"] != null)
+                {
+                    string bankAccountId = Request.QueryString["id"].ToString();
 
-            this.LoadAccountTypeDropDown();
-         
+                    BankAccounts objBankAccounts = new BankAccounts().GetBankAccountsByBankAccountId(int.Parse(bankAccountId), _company.CompanyId);
+                    
+                    if (objBankAccounts != null || objBankAccounts.BankAccountId != 0)
+                    {
+
+
+                        List<Bank> bankList = new List<Bank>();
+                        Bank bank = new Bank();
+
+                        lblId.Text = objBankAccounts.BankAccountId.ToString();
+
+                        bankIdRadDropDownList1.Items.Clear();
+                        bankList = bank.GetAllBank(_company.CompanyId);
+
+                        List<string> bankName = new List<string>();
+                        foreach (Bank bankNew in bankList)
+                        {
+                            if (bankNew.BankId == objBankAccounts.BankId)
+                                bankName.Add(bankNew.BankName);
+                        }
+                        bankIdRadDropDownList1.DataSource = bankName;
+                        bankIdRadDropDownList1.DataBind();
+
+                        txtBranchName.Value = objBankAccounts.BranchName;
+                        txtAccountNo.Value = objBankAccounts.AccountNo;
+                        txtTitle.Value = objBankAccounts.AccountTitle;
+
+                        accountTypeRadDropDownList1.Items.Clear();
+                        List<string> list = new List<string>();
+                        list.Add(objBankAccounts.AccountType);
+                        accountTypeRadDropDownList1.DataSource = list;
+                        accountTypeRadDropDownList1.DataBind();
+
+                        RadDatePicker2.SelectedDate = DateTime.Parse(objBankAccounts.OpeningDate);
+                        chkIsActive.Checked = objBankAccounts.IsActive;
+
+
+                    }
+                }
+            }
             this.LoadBankNames();
-           this.LoadAccountsTable();
+            this.LoadAccountTypeDropDown();
+       
         }
         private bool isValidSession()
         {
@@ -57,7 +91,7 @@ namespace Balancika
         void LoadBankNames()
         {
             
-            List<Bank>allBanks=new Bank().GetAllBank(1);
+            List<Bank>allBanks=new Bank().GetAllBank(_company.CompanyId);
             List<string>nameList=new List<string>();
             foreach (Bank bank in allBanks)
             {
@@ -92,36 +126,53 @@ namespace Balancika
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-           
-            BankAccounts objAccounts=new BankAccounts();
-
-            List<BankAccounts> myList = objAccounts.GetAllBankAccounts(_user.CompanyId);
-
-            objAccounts.BankAccountId = myList.Count;
-            objAccounts.BranchName = txtBranchName.Value;
-            objAccounts.AccountNo = txtAccountNo.Value;
-            objAccounts.AccountTitle = txtTitle.Value;
-            objAccounts.AccountType = accountTypeRadDropDownList1.SelectedItem.Text;
-            objAccounts.OpeningDate =(RadDatePicker2.SelectedDate.ToString());
-            objAccounts.CompanyId = _company.CompanyId;
-            objAccounts.IsActive = chkIsActive.Checked;
-
-            int success = objAccounts.InsertBankAccounts();
-
-            if (success > 0)
+            try
             {
-                Session["saveBankAccountInfo"]=("Accounts info Saved successfully");
-                Response.Redirect(Request.RawUrl);
-               
+                BankAccounts objAccounts = new BankAccounts();
+
+
+                List<BankAccounts> myList = objAccounts.GetAllBankAccounts(_user.CompanyId);
+
+                objAccounts.BankAccountId = myList.Count;
+                objAccounts.BranchName = txtBranchName.Value;
+                objAccounts.AccountNo = txtAccountNo.Value;
+                objAccounts.AccountTitle = txtTitle.Value;
+                objAccounts.AccountType = accountTypeRadDropDownList1.SelectedItem.Text;
+                objAccounts.OpeningDate = (RadDatePicker2.SelectedDate.ToString());
+                objAccounts.CompanyId = _company.CompanyId;
+                objAccounts.IsActive = chkIsActive.Checked;
+
+                int sucess = 0;
+                if (lblId.Text == "" || lblId.Text == "0")
+                {
+                    
+                    objAccounts.BankAccountId=new BankAccounts().GetMaxAccountId()+1;
+                    
+                    sucess = objAccounts.InsertBankAccounts();
+
+                    if (sucess > 0)
+                    {
+                        Alert.Show("Bank Accounts info saved successfully");
+                        this.Clear();
+                    }
+                }
+                else
+                {
+                    objAccounts.BankAccountId = int.Parse(lblId.Text);
+
+                    sucess = objAccounts.UpdateBankAccounts();
+
+                    if (sucess > 0)
+                    {
+                        Response.Redirect("BankAccoutsList.aspx", true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Alert.Show(ex.Message);
+            }
             
-                //
-                this.Clear();
-            }
-            else
-            {
-                Alert.Show("Error occured");
-            }
-
 
         }
 
@@ -134,29 +185,7 @@ namespace Balancika
 
         }
 
-        private void LoadAccountsTable()
-        {
-            try
-            {
-                tableBody.InnerHtml = "";
-                string htmlContent = "";
-                BankAccounts accounts=new BankAccounts();
-                List<BankAccounts> allaAccountses = accounts.GetAllBankAccounts(_company.CompanyId);
-                foreach (BankAccounts acc in allaAccountses)
-                {
-                    
-                    htmlContent += "<tr>";
-                    htmlContent += String.Format(@"<th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th><th>{5}</th><th>{6}</th>", acc.BankId,acc.BranchName, acc.AccountNo, acc.AccountTitle, acc.AccountType, acc.OpeningDate, acc.IsActive);
-                    htmlContent += "</tr>";
-                }
-
-                tableBody.InnerHtml += htmlContent;
-            }
-            catch (Exception exc)
-            {
-                Alert.Show(exc.Message);
-            }
-        }
+       
 
         protected void btnClear_Click(object sender, EventArgs e)
         {

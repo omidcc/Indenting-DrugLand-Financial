@@ -36,7 +36,7 @@ namespace Balancika
             }
             if (!IsPostBack)
             {
-                
+                this.LoadEmployeeListTable();
             }
 
         }
@@ -71,7 +71,9 @@ namespace Balancika
                         break;
                     case "btnDelete":
                         int success = new Employee().DeleteEmployeeByEmployeeId(int.Parse(id));
-                        if (success == 0)
+                        long addId = GetAddressID(int.Parse(id));
+                        int chk1 = new Addresses().DeleteAddressesByAddressId(addId);
+                        if (success == 0 || chk1==0)
                             Alert.Show("Data is not deleted");
                         else
                         {
@@ -108,6 +110,8 @@ namespace Balancika
                         _company.CompanyId);
                     employee.DepartmentName = aDepartment.DepartmentName;
                     employee.DesignationName = aDesignation.Designation;
+                    employee.DOB = DateTime.Parse(employee.DOB).ToShortDateString();
+                    employee.JoinDate = DateTime.Parse(employee.JoinDate).ToShortDateString();
                     List<string> countrList = Country.CountryList();
                     
 

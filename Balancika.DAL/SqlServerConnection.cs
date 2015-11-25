@@ -478,6 +478,7 @@ namespace Balancika.DAL
                 //sqlString = sqlString + " " + ConditionString;
                 sqlString = sqlString + " " + ConditionString;
 
+
             DataTable dt = new DataTable();
 
             try
@@ -485,6 +486,7 @@ namespace Balancika.DAL
                 Connect();
                 cmdSql.Connection = _sqlCon;
                 cmdSql.CommandText = sqlString;
+               
 
                 if (lstData != null)
                 {

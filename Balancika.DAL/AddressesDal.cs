@@ -15,7 +15,7 @@ namespace Balancika.DAL
         {
             try
             {
-                int maxId = GetMaximumID("Address", "AddressId", 0, "");
+                int maxId = GetMaximumID("Addresses", "AddressId", 0, "");
                 return maxId;
             }
             catch (Exception ex)

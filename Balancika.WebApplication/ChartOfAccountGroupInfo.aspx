@@ -53,6 +53,7 @@
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Add /Edit COA Group</h3>
+                    <asp:Label ID="lblId" runat="server" Visible="False" Text=""></asp:Label>
                 </div>
                 <div class="box-body">
                    
@@ -93,52 +94,14 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <asp:Button ID="button1" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Save Company Information" OnClick="btnSave_Click" />
+                            <asp:Button ID="button1" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Save Chart of Account Group" OnClick="btnSave_Click" />
                             <input class="btn btn-warning" runat="server" onserverclick="btnClear_Click" type="button" value="Clear Information" />
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title"> COA Groups</h3>
-                </div>
-                <div class="box-body">
-                    <div id="divCompanyTable" class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="coaTable" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>Group Name</th>
-                                            <th>Parent Group</th>
-                                       
-                                             <th>Is Active</th>
-                                            <th>Update By</th>
-                                            <th>Update Date</th>
-
-                                            <th>Company</th>
-                                           
-                                           
-                                        </tr>
-                                    </thead>
-                                    <div id="coaTableBody" runat="server">
-                                    </div>
-                                    <tfoot>
-                                        
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+           
         </section>
     </form>
 </asp:Content>

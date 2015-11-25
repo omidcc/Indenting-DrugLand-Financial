@@ -58,7 +58,8 @@ namespace Balancika.DAL.Base
 
 		public int UpdateSupplier(Hashtable lstData)
 		{
-			string sqlQuery = "Update Supplier set SupplierName = @SupplierName, IsActive = @IsActive, CompanyId = @CompanyId, UpdateBy = @UpdateBy, UpdateDate = @UpdateDate, TotalDebit = @TotalDebit, TotalCredit = @TotalCredit, Balance = @Balance where Supplier.SupplierId = @SupplierId;";
+            // modified , Balance = @Balance
+			string sqlQuery = "Update Supplier set SupplierName = @SupplierName, IsActive = @IsActive, CompanyId = @CompanyId, UpdateBy = @UpdateBy, UpdateDate = @UpdateDate, TotalDebit = @TotalDebit, TotalCredit = @TotalCredit where Supplier.SupplierId = @SupplierId;";
 			try
 			{
 				int success = ExecuteNonQuery(sqlQuery, lstData);

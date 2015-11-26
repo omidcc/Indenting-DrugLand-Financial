@@ -119,6 +119,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label for="txtVoucherNo" class="col-sm-4 control-label">Voucher No</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" width="60px" name="txtVoucherNo" id="txtVoucherNo" placeholder="Voucher No" runat="server" clientidmode="Static"/> 
+                                </div>
+
+                            </div>
+                        </div>
 
                         <div class="col-md-6">
                             <div class="form-group ">

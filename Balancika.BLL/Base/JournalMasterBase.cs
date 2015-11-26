@@ -108,7 +108,7 @@ namespace BALANCIKA.BLL.Base
 
 			JournalMaster objJournalMaster = new JournalMaster();
 			objJournalMaster.JournalId = (dr["JournalId"] == DBNull.Value) ? 0 : (Int64)dr["JournalId"];
-			objJournalMaster.JournalDate = (dr["JournalDate"] == DBNull.Value) ? "" : (String)dr["JournalDate"];
+			objJournalMaster.JournalDate = (dr["JournalDate"] == DBNull.Value) ? "" : (String)dr["JournalDate"].ToString();
 			objJournalMaster.JournalType = (dr["JournalType"] == DBNull.Value) ? "" : (String)dr["JournalType"];
 			objJournalMaster.JournalDescription = (dr["JournalDescription"] == DBNull.Value) ? "" : (String)dr["JournalDescription"];
 			objJournalMaster.UpdateBy = (dr["UpdateBy"] == DBNull.Value) ? 0 : (Int32)dr["UpdateBy"];

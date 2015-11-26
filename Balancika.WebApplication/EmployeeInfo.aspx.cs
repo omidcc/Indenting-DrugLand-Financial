@@ -58,18 +58,23 @@ namespace Balancika
                             department = new Department().GetDepartmentByDepartmentId(tempEmployee.DepartmentId,
                                 _company.CompanyId);
                             SetIndex(departmentDropDownList, department.DepartmentId.ToString());
+                            LoadDesignationDropDownList(tempEmployee.DepartmentId);
+                           
 
                         }
                         else
                         {
                             department = new Department();
                             departmentDropDownList.SelectedIndex = -1;
+                            LoadDesignationDropDownList(0);
                         }
+                        SetIndex(designationDropDownList,tempEmployee.DesignationId.ToString());
                         lblId.Text = tempEmployee.EmployeeId.ToString();
                         txtEmployeeCode.Value = tempEmployee.EmployeeCode;
                         txtEmployeeName.Value = tempEmployee.EmployeeName;
                         JoinRadDatePicker.SelectedDate = DateTime.Parse(tempEmployee.JoinDate);
                         RadDatePicker1.SelectedDate = DateTime.Parse(tempEmployee.DOB);
+                        chkIsActive.Checked = tempEmployee.IsActive;
                         
                        //SetIndex(designationDropDownList,designation.DesignationId.ToString());
                         foreach (Addresses tAddress in addressList)
@@ -106,10 +111,10 @@ namespace Balancika
 
         }
 
-        private void LoadDesignationDropDownList()
+        private void LoadDesignationDropDownList(int id)
         {
             designationDropDownList.ClearSelection();
-            int departmentId = departmentDropDownList.SelectedIndex>-1?int.Parse(departmentDropDownList.SelectedItem.Value):0;
+            int departmentId = id ;
             List<Designation> oDesignationList = new Designation().GetDesignationbyDepartmentId(departmentId);
             designationDropDownList.DataSource = oDesignationList;
             designationDropDownList.DataTextField = "Designation";
@@ -187,7 +192,7 @@ namespace Balancika
                 Employee aEmployee = new Employee();
                 Addresses aAddresses=new Addresses();
                 List<Employee> employeeListC =aEmployee.GetAllEmployee(_company.CompanyId);
-                
+                if (lblId.Text == "" || lblId.Text == "0")
                 foreach (Employee anEmployee in employeeListC)
                 {
                     if (anEmployee.EmployeeCode == txtEmployeeCode.Value)
@@ -231,7 +236,7 @@ namespace Balancika
                 aEmployee.IsActive = true;
                 aEmployee.UpdateBy = user.UserId;
                 aEmployee.UpdateDate = DateTime.Now;
-                if (lblId.Text != "" || lblId.Text != "0")
+                if (lblId.Text == "" || lblId.Text == "0")
                 {
                     aEmployee.EmployeeId = new Employee().GetMaxEmployeeId() + 1;
                     aAddresses.SourceId = aEmployee.EmployeeId;
@@ -255,7 +260,7 @@ namespace Balancika
                     aEmployee.EmployeeId = int.Parse(lblId.Text);
                     aAddresses.SourceId = aEmployee.EmployeeId;
                     aAddresses.AddressId = long.Parse(addlblId.Text);
-                   int chk3= aEmployee.UpdateAddresses();
+                   int chk3= aEmployee.UpdateEmployee();
                     int chk1=aAddresses.UpdateAddresses();
                     if(chk3>0&&chk1>0)
                         Response.Redirect("EmployeeList.aspx",true);
@@ -280,7 +285,8 @@ namespace Balancika
 
         protected void departmentDropDownList_IndexChanged(object sender, DropDownListEventArgs e)
         {
-            this.LoadDesignationDropDownList();
+            int id = int.Parse(departmentDropDownList.SelectedItem.Value);
+            this.LoadDesignationDropDownList(id);
         }
     }
 }

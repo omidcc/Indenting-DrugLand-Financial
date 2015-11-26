@@ -111,7 +111,7 @@ namespace Balancika
                     string port = HttpContext.Current.Request.Url.Port.ToString();
 
                     string path = "http://" + host + ":" + port + "/";
-                    this.GenerateMenu(user, path, companyId);
+                    this.GenerateMenu(user, path, Int32.Parse("0"));
 
                     Company company= new Company().GetCompanyByCompanyId(companyId);
                     Session["company"] = company;

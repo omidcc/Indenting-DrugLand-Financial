@@ -164,7 +164,7 @@ namespace Balancika
             address.CompanyId = _user.CompanyId;
 
 
-                if (lblId.Text != "" || lblId.Text != "0")
+                if (lblId.Text == "" || lblId.Text == "0")
                 {
                     newCompany.CompanyId = new Company().GetMaxCompanyId() + 1;
                     address.SourceId = newCompany.CompanyId;
@@ -188,7 +188,7 @@ namespace Balancika
                     newCompany.CompanyId = int.Parse(lblId.Text);
                     address.SourceId = newCompany.CompanyId;
                     address.AddressId = long.Parse(addlblId.Text);
-                    int chk1 = newCompany.UpdateAddresses();
+                    int chk1 = newCompany.UpdateCompany();
                     int chk2 = address.UpdateAddresses();
                     
 

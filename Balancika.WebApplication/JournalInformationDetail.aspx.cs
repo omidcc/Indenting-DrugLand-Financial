@@ -263,7 +263,7 @@ namespace Balancika
                 aJournal.Debit = Convert.ToDecimal(txtJournalDetailsDebit.Value!=null?txtJournalDetailsDebit.Value:"0");
                 aJournal.Credit = Convert.ToDecimal(txtJournalDetailsCredit.Value!=null?txtJournalDetailsCredit.Value:"0");
                 aJournal.Description = txtJorunalDetailsDescription.Value;
-                aJournal.VoucherNo = "JV-" + Convert.ToString(lastJournal.JournalDetailsId + 1) + "-" + DateTime.Now.Year.ToString();
+                aJournal.VoucherNo =txtVoucherNo.Value;
                 journalDetailsList.Add(aJournal);
                 Session["JournalDetailsInformation"] = journalDetailsList;
                 LoadJournalDetailsDataTable();

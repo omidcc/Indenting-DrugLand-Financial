@@ -148,6 +148,15 @@ namespace Balancika {
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtJorunalDetailsDescription;
         
         /// <summary>
+        /// txtVoucherNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtVoucherNo;
+        
+        /// <summary>
         /// txtJournalDetailsDebit control.
         /// </summary>
         /// <remarks>

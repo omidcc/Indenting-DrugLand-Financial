@@ -193,9 +193,10 @@ namespace Balancika
 
         public void Clear()
         {
+            lblId.Text = "";
             txtDesignationName.Value = "";
             departmentIdRadDropDownList.SelectedIndex = -1;
-            chkIsActive.Checked = false;
+            chkIsActive.Checked = true;
         }
 
        
@@ -206,7 +207,7 @@ namespace Balancika
             Department aDepartment=new Department();
             departmentList.Add(aDepartment);
             
-            departmentList= aDepartment.GetAllDepartment(0);
+            departmentList= aDepartment.GetAllDepartment(_company.CompanyId);
             departmentIdRadDropDownList.DataSource = departmentList;
             departmentIdRadDropDownList.DataTextField = "DepartmentName";
             departmentIdRadDropDownList.DataValueField = "DepartmentId";

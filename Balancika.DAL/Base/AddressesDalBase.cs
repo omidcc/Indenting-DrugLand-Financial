@@ -14,7 +14,7 @@ namespace Balancika.DAL.Base
 			DataTable dt = new DataTable();
 			try
 			{
-				dt = GetDataTable("Addresses", "*", "", lstData);
+				dt = GetDataTable("Addresses", "*", "Where CompanyId = @CompanyId", lstData);
 				return dt;
 			}
 			catch (Exception ex)

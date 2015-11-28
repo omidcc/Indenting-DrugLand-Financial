@@ -72,7 +72,7 @@ namespace Balancika
         {
             CostCenter objCenter=new CostCenter();
 
-            objCenter.CostCenterId = listCenter.Count;
+           
             objCenter.CostCenterType = txtCostCenterType.Value;
             objCenter.CostCenterName = txtCostCentreName.Value;
             objCenter.IsActive = chkIsActive.Checked;
@@ -107,7 +107,16 @@ namespace Balancika
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            
+            Clear();
+
+        }
+
+        private void Clear()
+        {
+            lblId.Text = "";
+            txtCostCenterType.Value = "";
+            txtCostCentreName.Value = "";
+
         }
     }
 }

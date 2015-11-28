@@ -173,11 +173,28 @@ namespace Balancika
             }
             
         }
-       
 
+        public void Clear()
+        {
+            lblId.Text =
+                addlblId.Text =
+                    txtSupplierName.Value =
+                        txtAddressLine1.Value =
+                            txtAddressLine2.Value =
+                                txtCity.Value =
+                                    txtZipCode.Value =
+                                        txtEmail.Value =
+                                            txtPhone.Value =
+                                                txtMobile.Value =
+                                                    txtWeb.Value =
+                                                        txtTotalCredit.Value =
+                                                            txtTotalDebit.Value = "";
+                                                                chkIsActive.Checked = true;
+            countryDropDownList.SelectedIndex = -1;
+        }
         protected void btnClear_Click(object sender, EventArgs e)
         {
-  
+                this.Clear();
         }
 
         protected void countryDropDownList_ItemSelected(object sender, DropDownListEventArgs e)

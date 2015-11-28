@@ -91,7 +91,7 @@ namespace Balancika
                                                         txtMobile.Value =
                                                             txtEmail.Value =
                                                                 txtWeb.Value = "";
-            chkIsActive.Checked = false;
+            chkIsActive.Checked = true;
         }
 
 
@@ -211,13 +211,11 @@ namespace Balancika
 
        
 
-        private void Clear()
-        {
-
-        }
+       
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
+            this.ClearAll();
 
         }
 

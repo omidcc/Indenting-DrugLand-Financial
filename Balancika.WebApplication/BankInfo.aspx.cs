@@ -128,6 +128,8 @@ namespace Balancika
             txtDesignation.Value = "";
             txtContactNo.Value = "";
             txtEmail.Value = "";
+            
+
             chkIsActive.Checked = true;
         }
 

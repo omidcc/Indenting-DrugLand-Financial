@@ -138,10 +138,11 @@ namespace Balancika
 
         public void Clear()
         {
+            lblId.Text=
             txtDepartmentName.Value =
                 "";
 
-            chkIsActive.Checked = false;
+            chkIsActive.Checked = true;
         }
 
         void LoadParentDepartmentIdDropDown()

@@ -15,7 +15,7 @@ namespace BALANCIKA.DAL.Base
 			DataTable dt = new DataTable();
 			try
 			{
-				dt = GetDataTable("CostCenter", "*", " Where CostCenter.IsActive = 1;", lstData);
+				dt = GetDataTable("CostCenter", "*", " Where CostCenter.IsActive = 1 And CompanyId=@CompanyId;", lstData);
 				return dt;
 			}
 			catch (Exception ex)

@@ -14,7 +14,7 @@ namespace Balancika.DAL.Base
 			DataTable dt = new DataTable();
 			try
 			{
-				dt = GetDataTable("ChartOfAccountGroup", "*", " Where ChartOfAccountGroup.IsActive = 1;", lstData);
+				dt = GetDataTable("ChartOfAccountGroup", "*", " Where ChartOfAccountGroup.IsActive = 1 And CompanyId = @CompanyId;", lstData);
 				return dt;
 			}
 			catch (Exception ex)

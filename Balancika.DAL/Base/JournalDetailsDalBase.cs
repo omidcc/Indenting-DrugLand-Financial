@@ -15,7 +15,7 @@ namespace BALANCIKA.DAL.Base
 			DataTable dt = new DataTable();
 			try
 			{
-				dt = GetDataTable("JournalDetails", "*", "", lstData);
+                dt = GetDataTable("JournalDetails", "*", "Where CompanyId = @CompanyId", lstData);
 				return dt;
 			}
 			catch (Exception ex)

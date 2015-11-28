@@ -111,6 +111,22 @@ namespace Balancika
 
         }
 
+        public void Clear()
+        {
+            lblId.Text =
+                txtEmployeeCode.Value =
+                    txtEmployeeName.Value =
+                    addlblId.Text =
+                                txtAddressLine1.Value =
+                                    txtAddressLine2.Value =
+                                        txtCity.Value =
+                                            txtEmail.Value =
+                                                txtZipCode.Value =
+                                                    txtPhoneNo.Value = "";
+            countryDropDownList.SelectedIndex = -1;
+            chkIsActive.Checked = true;
+        }
+
         private void LoadDesignationDropDownList(int id)
         {
             designationDropDownList.ClearSelection();

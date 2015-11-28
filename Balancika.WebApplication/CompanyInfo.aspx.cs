@@ -226,13 +226,14 @@ namespace Balancika
 
         public void Clear()
         {
+            lblId.Text = "";
             txtCompanyName.Value = "";
             
             txtEmail.Value = "";
             txtWeb.Value = "";
             txtPhoneNo.Value = "";
             txtLogoPath.Value = "";
-            chkIsActive.Checked = false;
+            chkIsActive.Checked = true;
             isNewEntry = true;
             countryDropDownList.SelectedIndex = -1;
         }

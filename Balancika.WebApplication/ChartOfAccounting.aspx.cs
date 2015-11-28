@@ -195,6 +195,8 @@ namespace Balancika
         }
         private void Clear()
         {
+            lblId.Text = "";
+            
             txtChartOfAccountCode.Value = "";
             txtChartOfAccountTitle.Value = "";
         }

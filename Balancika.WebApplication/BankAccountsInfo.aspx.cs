@@ -178,10 +178,11 @@ namespace Balancika
 
         private void Clear()
         {
+            lblId.Text = "";
             txtBranchName.Value = "";
             txtAccountNo.Value = "";
             txtTitle.Value = "";
-            chkIsActive.Checked = false;
+            chkIsActive.Checked = true;
 
         }
 

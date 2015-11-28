@@ -119,6 +119,7 @@ namespace Balancika
       
         private void Clear()
         {
+            lblId.Text = "";
             txtGroupName.Value = "";
         }
 
@@ -126,7 +127,7 @@ namespace Balancika
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            
+            Clear();
         }
     }
 }

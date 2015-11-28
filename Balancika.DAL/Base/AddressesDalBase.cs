@@ -37,6 +37,20 @@ namespace Balancika.DAL.Base
 				throw new Exception(ex.Message);
 			}
 		}
+        public DataTable GetAddressesBySourceTypeAndSourceID(Hashtable lstData)
+        {
+            string whereCondition = " where Addresses.SourceType = @SourceType And Addresses.SourceId= @SourceId ";
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = GetDataTable("Addresses", "*", whereCondition, lstData);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
 		public int InsertAddresses(Hashtable lstData)
 		{

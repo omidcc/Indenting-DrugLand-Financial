@@ -118,7 +118,15 @@
 
                         </div>
                     </div>
+                     <div class="col-md-6">
+                        <div class="form-group ">
+                            <label for="txtMobile" class="col-sm-4 control-label">Mobile</label>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" width="60px" name="txtMobile" id="txtMobile" placeholder="Mobile Number" runat="server" />
+                            </div>
 
+                        </div>
+                    </div>
                     
                   
 

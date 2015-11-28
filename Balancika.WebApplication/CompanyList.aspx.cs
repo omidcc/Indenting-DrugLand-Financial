@@ -47,11 +47,8 @@ namespace Balancika
                 foreach (Company objCst in objCompanyList)
                 {
                    
-                    List<Addresses> addressList = new Addresses().GetAllAddresses(_company.CompanyId);
-                    foreach (Addresses address in addressList)
-                    {
-                        if (address.SourceType == "Company" && address.SourceId == objCst.CompanyId)
-                        {
+                    Addresses address= new Addresses().GetAddressesBySourceTypeAndId("Company",objCst.CompanyId);
+                    
                             objCst.AddressId = address.AddressId;
                             objCst.AddressLine1 = address.AddressLine1;
                             objCst.AddressLine2 = address.AddressLine2;
@@ -64,10 +61,8 @@ namespace Balancika
                             objCst.Web = address.Web;
                             objCst.CountryName = countryList[address.CountryId];
 
-                            break;
-                        }
-
-                    }
+                          
+                        
                 }
                 RadGrid1.DataSource = objCompanyList;
                 RadGrid1.Rebind();

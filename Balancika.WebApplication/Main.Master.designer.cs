@@ -13,6 +13,24 @@ namespace Balancika {
     public partial class Main {
         
         /// <summary>
+        /// name1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl name1;
+        
+        /// <summary>
+        /// name2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl name2;
+        
+        /// <summary>
         /// SpnUser control.
         /// </summary>
         /// <remarks>

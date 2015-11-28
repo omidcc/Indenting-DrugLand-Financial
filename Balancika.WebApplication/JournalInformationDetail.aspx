@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label for="txtJournalDescription" class="col-sm-4 control-label">Journal Description</label>
                                 <div class="col-sm-8">
-                                    <textarea type="text" class="form-control" width="60px" name="txtJournalDescription" id="txtJournalDescription" placeholder="Address" runat="server"></textarea>
+                                    <textarea type="text" class="form-control" width="60px" name="txtJournalDescription" id="txtJournalDescription" placeholder="Journal Description" runat="server"></textarea>
                                 </div>
                             </div>
                         </div>

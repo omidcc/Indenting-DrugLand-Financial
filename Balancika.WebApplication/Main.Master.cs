@@ -25,6 +25,8 @@ namespace Balancika
                 {
                     company = (Company) Session["company"];
                     ltrlCompany.Text = company.CompanyName;
+                    name1.InnerText += company.CompanyName;
+                    name2.InnerText += company.CompanyName;
                 }
             }
         }

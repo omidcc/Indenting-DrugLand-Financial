@@ -149,7 +149,7 @@ namespace Balancika
 
         protected void btnJournalMasterClear_Click(object sender, EventArgs e)
         {
-            txtJournalDescription.Value = "";
+            Response.Redirect("JournalInformationDetail.aspx",true);
             
         }
 

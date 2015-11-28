@@ -114,6 +114,16 @@ namespace Balancika.BLL.Base
 			DataRow dr = dt.Rows[0];
 			return GetObject(dr);
 		}
+        public Addresses GetAddressesBySourceTypeAndId(String _sourceType, long _sourceId)
+        {
+            Hashtable lstItems = new Hashtable();
+            lstItems.Add("@SourceType", _sourceType);
+            lstItems.Add("@SourceId", _sourceId);
+
+            DataTable dt = dal.GetAddressesBySourceTypeAndSourceID(lstItems);
+            DataRow dr = dt.Rows[0];
+            return GetObject(dr);
+        }
 
 		protected  Addresses GetObject(DataRow dr)
 		{

@@ -92,12 +92,10 @@ namespace Balancika
         {
             
             List<Bank>allBanks=new Bank().GetAllBank(_company.CompanyId);
-            List<string>nameList=new List<string>();
-            foreach (Bank bank in allBanks)
-            {
-                nameList.Add(bank.BankName);
-            }
-            bankIdRadDropDownList1.DataSource = nameList;
+           
+            bankIdRadDropDownList1.DataSource = allBanks;
+            bankIdRadDropDownList1.DataTextField = "BankName";
+            bankIdRadDropDownList1.DataValueField = "BankId";
             bankIdRadDropDownList1.DataBind();
         }
         void LoadAccountTypeDropDown()
@@ -134,6 +132,16 @@ namespace Balancika
                 List<BankAccounts> myList = objAccounts.GetAllBankAccounts(_user.CompanyId);
 
                 objAccounts.BankAccountId = myList.Count;
+                if (bankIdRadDropDownList1.SelectedIndex > -1)
+                {
+                   
+                    objAccounts.BankId = int.Parse(bankIdRadDropDownList1.SelectedItem.Value);
+                }
+                else
+                {
+                    Alert.Show("Please select a bank");
+                    
+                }
                 objAccounts.BranchName = txtBranchName.Value;
                 objAccounts.AccountNo = txtAccountNo.Value;
                 objAccounts.AccountTitle = txtTitle.Value;

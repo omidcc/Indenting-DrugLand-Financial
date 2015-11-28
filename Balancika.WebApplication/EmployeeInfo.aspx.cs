@@ -246,7 +246,7 @@ namespace Balancika
                 aAddresses.Email = txtEmail.Value;
                 aAddresses.Web = "";
                 aAddresses.Phone = txtPhoneNo.Value;
-                aAddresses.Mobile = "";
+                aAddresses.Mobile = txtMobile.Value;
                 aAddresses.CompanyId = _company.CompanyId;
                 aEmployee.CompanyId = _company.CompanyId;
                 aEmployee.IsActive = true;

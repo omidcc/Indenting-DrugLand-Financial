@@ -16,7 +16,7 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <asp:Button class="btn" ID="btnAddNew" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Add New Supplier Information" OnClick="btnAddNew_OnClick" />
+                                <asp:Button class="btn" ID="btnAddNew" runat="server" ClientIDMode="Static" CssClass="btn btn-success" Text="Add New a Information" OnClick="btnAddNew_OnClick" />
                             </div>
 
                         </div>
